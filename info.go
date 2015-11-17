@@ -9,6 +9,6 @@ func getg() *g
 // GoroutineId return id of current goroutine.
 // It's guaranteed to be unique globally during app's life time.
 func GoroutineId() int64 {
-    gp := getg()
-    return gp.goid
+	gp := getg()
+	return gp.goid
 }

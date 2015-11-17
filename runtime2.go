@@ -129,6 +129,7 @@ type guintptr uintptr
 
 func (gp guintptr) ptr() *g   { return (*g)(unsafe.Pointer(gp)) }
 func (gp *guintptr) set(g *g) { *gp = guintptr(unsafe.Pointer(g)) }
+
 // func (gp *guintptr) cas(old, new guintptr) bool {
 // 	return casuintptr((*uintptr)(unsafe.Pointer(gp)), uintptr(old), uintptr(new))
 // }
