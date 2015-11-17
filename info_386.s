@@ -8,6 +8,6 @@
 
 TEXT ·getg(SB), NOSPLIT, $0-4
     get_tls(CX)
-    MOVL g(CX), AX
-    MOVL AX, ret+0(FP)
+    MOVL    g(CX), AX
+    MOVL    AX, ret+0(FP)
     RET
