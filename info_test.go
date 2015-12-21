@@ -7,6 +7,8 @@ package goroutine
 import (
 	"fmt"
 	"math/rand"
+	"runtime"
+	"runtime/debug"
 	"testing"
 	"time"
 )
@@ -44,4 +46,39 @@ func TestGoroutineIdConsistency(t *testing.T) {
 	if failed {
 		t.Fatalf("Test failed.")
 	}
+}
+
+func TestGetGoexitFuncSBPosition(t *testing.T) {
+	runtime.GOMAXPROCS(1)
+	exit := make(chan bool)
+
+	go func() {
+		pc := get_goexit() + _PCQuantum
+		t.Logf("goexit pc is: %x", pc)
+
+		found, cnt := find_goexit_pc(_PCQuantum)
+		t.Logf("found: %x (%v times)", found, cnt)
+
+		t.Logf("id: %v", GoroutineId())
+
+		if hook_goexit(_PCQuantum) {
+			t.Logf("hacked")
+		} else {
+			t.Logf("not hacked")
+		}
+
+		exit <- true
+	}()
+
+	<-exit
+
+	for i := 0; i < 5; i++ {
+		runtime.GC()
+		t.Logf("wait for some time... %v", i+1)
+		t.Logf("Stack: %v", string(debug.Stack()))
+		runtime.Gosched()
+		time.Sleep(time.Millisecond * 10)
+	}
+
+	t.Logf("test is done.")
 }

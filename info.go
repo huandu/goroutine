@@ -4,11 +4,19 @@
 
 package goroutine
 
-func getg() *g
+import (
+	//"unsafe"
+	"fmt"
+)
 
 // GoroutineId return id of current goroutine.
 // It's guaranteed to be unique globally during app's life time.
 func GoroutineId() int64 {
 	gp := getg()
 	return gp.goid
+}
+
+func hack_goexit() {
+	fmt.Println("Goroutine ID:", GoroutineId())
+    real_goexit(_PCQuantum)
 }
