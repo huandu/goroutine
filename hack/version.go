@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var reVersion = regexp.MustCompile(`^go(\d+)(\.(\d+))+`)
+var reVersion = regexp.MustCompile(`^go((\d+)(\.(\d+))*)`)
 
 type Version []string
 
@@ -19,15 +19,11 @@ func ParseVersion(version string) (Version, error) {
 	matches := reVersion.FindStringSubmatch(version)
 
 	if matches == nil {
-		return nil, fmt.Errorf("invalid version format")
+		return nil, fmt.Errorf("invalid version format. [version:%v]", version)
 	}
 
-	v := Version{}
-
-	for i := 1; i < len(matches); i += 2 {
-		v = append(v, matches[i])
-	}
-
+	number := matches[1]
+	v := (Version)(strings.Split(number, "."))
 	return v, nil
 }
 
