@@ -1,4 +1,4 @@
-// Copyright 2015 Huan Du. All rights reserved.
+// Copyright 2016 Huan Du. All rights reserved.
 // Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
 
@@ -10,6 +10,8 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+
+	"github.com/huandu/goroutine/version"
 )
 
 var (
@@ -23,7 +25,7 @@ var (
 type Context struct {
 	GoSrc      string  // Path to go src root directory.
 	GoPackage  string  // Path to package src in go src directory.
-	Version    Version // Version number.
+	Version    version.Version // Version number.
 	Output     string  // Path to output directory.
 	ImportPath string  // The prefix of import path for output directory.
 }
@@ -81,7 +83,7 @@ func validateGoSrc(context *Context) {
 		logFatalf("VERSION in go src is empty. [go-src:%v]", flagGoSrc)
 	}
 
-	version, err := ParseVersion(versionBuf.String())
+	version, err := version.Parse(versionBuf.String())
 
 	if err != nil {
 		logFatalf("VERSION file content is not valid. [go-src:%v] [err:%v] [content:%v]", flagGoSrc, err, versionBuf.String())
@@ -149,5 +151,5 @@ func main() {
 	validateOutput(context)
 	validateImportPath(context)
 
-	GenerateHackedFiles(context, "runtime")
+	NewGenerator(context, &RuntimeHacker{}).Parse()
 }

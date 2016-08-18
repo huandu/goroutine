@@ -22,9 +22,12 @@ See [godoc](https://godoc.org/github.com/huandu/goroutine) for more details.
 ## Caveats ##
 
 Package goroutine is not well tested due to lack of test machines.
+Ideally, it should work on all go >= go1.5.
 
 Tested platforms.
-* go1.5.1 + Darwin (Mac OSX 10.11.1) + amd64 CPU
+* go1.5.1 + Darwin (Mac OSX 10.11.6) + amd64 CPU
+* go1.6.3 + Darwin (Mac OSX 10.11.6) + amd64 CPU
+* go1.7 + Darwin (Mac OSX 10.11.6) + amd64 CPU
 
 ## License ##
 

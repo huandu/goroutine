@@ -1,4 +1,4 @@
-// Copyright 2015 Huan Du. All rights reserved.
+// Copyright 2016 Huan Du. All rights reserved.
 // Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
 
@@ -9,11 +9,27 @@ import (
 	"math/rand"
 	"testing"
 	"time"
+	"sort"
 )
 
+type Int64Slice []int64
+
+func (s Int64Slice) Len() int {
+	return len(s)
+}
+
+func (s Int64Slice) Less(i, j int) bool {
+	return s[i] < s[j]
+}
+
+func (s Int64Slice) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
 func TestGoroutineIdConsistency(t *testing.T) {
-	cnt := 10
+	cnt := 100
 	exit := make(chan error)
+	goids := make(Int64Slice, cnt)
 
 	for i := 0; i < cnt; i++ {
 		go func(n int) {
@@ -26,6 +42,7 @@ func TestGoroutineIdConsistency(t *testing.T) {
 				return
 			}
 
+			goids[n] = id1
 			exit <- nil
 		}(i)
 	}
@@ -43,5 +60,15 @@ func TestGoroutineIdConsistency(t *testing.T) {
 
 	if failed {
 		t.Fatalf("Test failed.")
+	}
+
+	// Goid must be unique.
+	t.Logf("Goid list: %v", goids)
+	sort.Sort(goids)
+
+	for i := 1; i < len(goids); i++ {
+		if goids[i - 1] == goids[i] {
+			t.Fatalf("Found duplicated goid. [goid:%v]", goids[i])
+		}
 	}
 }
