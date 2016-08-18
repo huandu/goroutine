@@ -63,7 +63,7 @@ func (g *Generator) parsePkg(pkg string) {
 		panic(err)
 	}
 
-	logTracef("Parsed package `%v`...", pkg)
+	logDebugf("Parsed package `%v`...", pkg)
 
     if _, ok := pkgs["main"]; ok {
         delete(pkgs, "main")
@@ -81,7 +81,7 @@ func (g *Generator) parsePkg(pkg string) {
 
 	goDir := "go" + g.context.Version.Join("_")
 	output := filepath.Join(g.context.Output, goDir, pkg)
-	importPrefix := filepath.Join(g.context.ImportPath, goDir, pkg)
+	importPrefix := filepath.Join(g.context.ImportPath, goDir)
 
 	err = os.MkdirAll(output, os.ModeDir | 0755)
 
@@ -89,7 +89,7 @@ func (g *Generator) parsePkg(pkg string) {
 		panic(err)
 	}
 
-	logTracef("Created output path `%v`...", output)
+	logDebugf("Created output path `%v`...", output)
 
 	for _, p := range pkgs {
 		//name := p.Name
@@ -98,7 +98,7 @@ func (g *Generator) parsePkg(pkg string) {
 FilesLoop:
 		for filename, f := range files {
 			filename = filepath.Base(filename)
-			logTracef("Package `%v`: Working on file `%v`...", pkg, filename)
+			logDebugf("Package `%v`: Working on file `%v`...", pkg, filename)
 
 			// Skip all ignored files.
 			comments := f.Comments
@@ -108,7 +108,7 @@ FilesLoop:
 
 				for _, c := range list {
 					if reBuildIgnoreFlag.MatchString(c.Text) {
-						logTracef("Package `%v`: Ignored file `%v`.", pkg, filename)
+						logDebugf("Package `%v`: Ignored file `%v`.", pkg, filename)
 						continue FilesLoop
 					}
 				}
@@ -117,9 +117,11 @@ FilesLoop:
 			imports := f.Imports
 			decls := f.Decls
 			neededDecls := []ast.Decl{}
-			neededImports := []*ast.ImportSpec{}
-			checkedImports := map[string]bool{}
-			importPathMap := map[string]*ast.ImportSpec{}
+			neededComments := map[*ast.CommentGroup]bool{}
+			importPathMap := map[string]string{}
+			usedImports := map[string]bool{}
+			usedImportPathMap := map[string]bool{}
+			allImportDecls := []*ast.GenDecl{}
 
 			for _, imprt := range imports {
 				importName := imprt.Name
@@ -136,14 +138,22 @@ FilesLoop:
 					continue
 				}
 
-				importPathMap[importName.Name] = imprt
+				importPathMap[importName.Name] = importPath
 			}
 
 			for _, decl := range decls {
 				genDecl, ok := decl.(*ast.GenDecl)
 
-				// Only type decl is needed.
-				if !ok || genDecl.Tok != token.TYPE {
+				if !ok {
+					continue
+				}
+
+				if genDecl.Tok == token.IMPORT {
+					allImportDecls = append(allImportDecls, genDecl)
+					continue
+				}
+
+				if genDecl.Tok != token.TYPE {
 					continue
 				}
 
@@ -165,18 +175,22 @@ FilesLoop:
 
 							// Ignore entire type spec if it contains any type imported from C.
                             if pkgName == "C" {
-								logFatalf("It's not possible to parsee C type `%v.%v` for type. [type:%v]", pkgName, typeName, typeSpec.Name.Name)
+								logErrorf("It's not possible to parsee C type `%v.%v` for type. [type:%v]", pkgName, typeName, typeSpec.Name.Name)
 								needWalk = false
                                 break
                             }
 
-							if _, ok := checkedImports[pkgName]; !ok {
-								if importDecl, ok := importPathMap[pkgName]; ok {
-									neededImports = append(neededImports, importDecl)
-									checkedImports[pkgName] = true
-								} else {
-									logFatalf("Fail to find package name in import path map. [package:%v] [map:%v]", pkgName, importPathMap)
+							if _, ok := usedImports[pkgName]; !ok {
+								importPath, ok := importPathMap[pkgName]
+
+								if !ok {
+									logErrorf("Fail to find package name in import path map. [package:%v] [map:%v]", pkgName, importPathMap)
+									needWalk = false
+									break
 								}
+
+								usedImports[pkgName] = true
+								usedImportPathMap[importPath] = true
 							}
 						}
 
@@ -191,36 +205,75 @@ FilesLoop:
 				if len(neededSpecs) != 0 {
 					genDecl.Specs = neededSpecs
 					neededDecls = append(neededDecls, decl)
+					neededComments[genDecl.Doc] = true
 				}
 			}
 
-			// Internal package must be generated if it's referred.
-			for _, imprt := range neededImports {
-				importPath := strings.Trim(imprt.Path.Value, `"`)
-				segments := strings.Split(importPath, "/")
-
-				for _, seg := range segments {
-					if seg == "internal" {
-						if _, ok := g.parsedPkgs[importPath]; !ok {
-							g.pkgs = append(g.pkgs, importPath)
-							g.parsedPkgs[importPath] = false
-						}
-
-						imprt.Path.Value = `"` + filepath.Join(importPrefix, importPath) + `"`
-						break
-					}
-				}
-			}
 
 			if len(neededDecls) == 0 {
+				logDebugf("Package `%v`: Skip file `%v` as there is no type decl in this file.", pkg, filename)
 				continue
 			}
 
-			f.Decls = neededDecls
-			f.Imports = neededImports // FIXME: Not work. Hack f.Decls instead. Printer doesn't read it.
+			hackedDecls := make([]ast.Decl, 0, len(neededDecls) + len(allImportDecls))
+			hackedImportSpecs := make([]*ast.ImportSpec, 0, len(allImportDecls))
+			hackedComments := make([]*ast.CommentGroup, 0, len(f.Comments))
+
+			// Filter import decls and hack internal package.
+			for _, genDecl := range allImportDecls {
+				specs := genDecl.Specs
+				neededSpecs := []ast.Spec{}
+
+				for _, spec := range specs {
+					importSpec := spec.(*ast.ImportSpec)
+					importPath := strings.Trim(importSpec.Path.Value, `"`)
+
+					if _, ok := usedImportPathMap[importPath]; !ok {
+						continue
+					}
+
+					segments := strings.Split(importPath, "/")
+
+					// Internal package must be generated to make compiler happy.
+					for _, seg := range segments {
+						if seg == "internal" {
+							if _, ok := g.parsedPkgs[importPath]; !ok {
+								g.pkgs = append(g.pkgs, importPath)
+								g.parsedPkgs[importPath] = false
+							}
+
+							importSpec.Path.Value = `"` + filepath.Join(importPrefix, importPath) + `"`
+							break
+						}
+					}
+
+					hackedImportSpecs = append(hackedImportSpecs, importSpec)
+					neededSpecs = append(neededSpecs, importSpec)
+				}
+
+				if len(neededSpecs) == 0 {
+					continue
+				}
+
+				genDecl.Specs = neededSpecs
+				hackedDecls = append(hackedDecls, genDecl)
+			}
+
+			hackedDecls = append(hackedDecls, neededDecls...)
+
+			// Keep comments before `package` and type decl.
+			for _, commentGroup := range f.Comments {
+				if _, ok := neededComments[commentGroup]; ok || commentGroup.List[0].Slash < f.Package {
+					hackedComments = append(hackedComments, commentGroup)
+				}
+			}
+
+			f.Decls = hackedDecls
+			f.Imports = hackedImportSpecs
+			f.Comments = hackedComments
 
 			// Create file with modified go src.
-			logTracef("Package `%v`: Start to write file `%v`...", pkg, filename)
+			logDebugf("Package `%v`: Start to write file `%v`...", pkg, filename)
 			fullPath := filepath.Join(output, filename)
 			file, err := os.Create(fullPath)
 
@@ -235,7 +288,7 @@ FilesLoop:
 				panic(err)
 			}
 
-			logTracef("Package `%v`: File `%v` is written.", pkg, filename)
+			logDebugf("Package `%v`: File `%v` is written.", pkg, filename)
 		}
 
 		g.parsedPkgs[pkg] = true

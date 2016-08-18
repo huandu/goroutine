@@ -7,7 +7,14 @@ package main
 import (
 	"fmt"
 	"os"
+	"flag"
 )
+
+var flagDebug bool
+
+func init() {
+	flag.BoolVar(&flagDebug, "debug", false, "Print debug information.")
+}
 
 func logFatalf(format string, args ...interface{}) {
 	err := fmt.Errorf(format, args...)
@@ -20,4 +27,12 @@ func logErrorf(format string, args ...interface{}) {
 
 func logTracef(format string, args ...interface{}) {
 	fmt.Printf("TRACE: "+format+"\n", args...)
+}
+
+func logDebugf(format string, args ...interface{}) {
+	if !flagDebug {
+		return
+	}
+
+	fmt.Printf("DEBUG: "+format+"\n", args...)
 }
