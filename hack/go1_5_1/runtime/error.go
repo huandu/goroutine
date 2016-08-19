@@ -13,10 +13,10 @@ type Error interface {
 
 // A TypeAssertionError explains a failed type assertion.
 type TypeAssertionError struct {
-	interfaceString	string
-	concreteString	string
-	assertedString	string
-	missingMethod	string
+	interfaceString string
+	concreteString  string
+	assertedString  string
+	missingMethod   string
 }
 
 // An errorString represents a runtime error described by a single string.

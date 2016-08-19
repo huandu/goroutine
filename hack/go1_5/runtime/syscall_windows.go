@@ -5,7 +5,7 @@
 package runtime
 
 type callbacks struct {
-	lock	mutex
-	ctxt	[cb_max]*wincallbackcontext
-	n	int
+	lock mutex
+	ctxt [cb_max]*wincallbackcontext
+	n    int
 }

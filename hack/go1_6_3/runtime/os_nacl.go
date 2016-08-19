@@ -5,7 +5,7 @@
 package runtime
 
 type mOS struct {
-	waitsema	int32
-	waitsemacount	int32
-	waitsemalock	int32
+	waitsema      int32
+	waitsemacount int32
+	waitsemalock  int32
 }

@@ -10,13 +10,13 @@ import (
 )
 
 const (
-	c0	= uintptr((8-sys.PtrSize)/4*2860486313 + (sys.PtrSize-4)/4*33054211828000289)
-	c1	= uintptr((8-sys.PtrSize)/4*3267000013 + (sys.PtrSize-4)/4*23344194077549503)
+	c0 = uintptr((8-sys.PtrSize)/4*2860486313 + (sys.PtrSize-4)/4*33054211828000289)
+	c1 = uintptr((8-sys.PtrSize)/4*3267000013 + (sys.PtrSize-4)/4*23344194077549503)
 )
 
 // type algorithms - known to compiler
 const (
-	alg_NOEQ	= iota
+	alg_NOEQ = iota
 	alg_MEM0
 	alg_MEM8
 	alg_MEM16
@@ -36,9 +36,9 @@ const (
 // typeAlg is also copied/used in reflect/type.go.
 // keep them in sync.
 type typeAlg struct {
-	hash	func(unsafe.Pointer, uintptr) uintptr
+	hash func(unsafe.Pointer, uintptr) uintptr
 
-	equal	func(unsafe.Pointer, unsafe.Pointer) bool
+	equal func(unsafe.Pointer, unsafe.Pointer) bool
 }
 
 const hashRandomBytes = sys.PtrSize / 4 * 64

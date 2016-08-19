@@ -7,8 +7,8 @@ package runtime
 const memDebug = false
 
 type memHdr struct {
-	next	memHdrPtr
-	size	uintptr
+	next memHdrPtr
+	size uintptr
 }
 
 type memHdrPtr uintptr

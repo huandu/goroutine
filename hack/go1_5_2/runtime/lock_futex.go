@@ -7,11 +7,11 @@
 package runtime
 
 const (
-	mutex_unlocked	= 0
-	mutex_locked	= 1
-	mutex_sleeping	= 2
+	mutex_unlocked = 0
+	mutex_locked   = 1
+	mutex_sleeping = 2
 
-	active_spin	= 4
-	active_spin_cnt	= 30
-	passive_spin	= 1
+	active_spin     = 4
+	active_spin_cnt = 30
+	passive_spin    = 1
 )

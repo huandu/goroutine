@@ -8,12 +8,12 @@
 package runtime
 
 const (
-	memProfile	bucketType	= 1 + iota
+	memProfile bucketType = 1 + iota
 	blockProfile
 
-	buckHashSize	= 179999
+	buckHashSize = 179999
 
-	maxStack	= 32
+	maxStack = 32
 )
 
 type bucketType int
@@ -27,38 +27,38 @@ type bucketType int
 // Per-call-stack profiling information.
 // Lookup by hashing call stack into a linked-list hash table.
 type bucket struct {
-	next	*bucket
-	allnext	*bucket
-	typ	bucketType
-	hash	uintptr
-	size	uintptr
-	nstk	uintptr
+	next    *bucket
+	allnext *bucket
+	typ     bucketType
+	hash    uintptr
+	size    uintptr
+	nstk    uintptr
 }
 
 // A memRecord is the bucket data for a bucket of type memProfile,
 // part of the memory profile.
 type memRecord struct {
-	allocs		uintptr
-	frees		uintptr
-	alloc_bytes	uintptr
-	free_bytes	uintptr
+	allocs      uintptr
+	frees       uintptr
+	alloc_bytes uintptr
+	free_bytes  uintptr
 
-	prev_allocs		uintptr
-	prev_frees		uintptr
-	prev_alloc_bytes	uintptr
-	prev_free_bytes		uintptr
+	prev_allocs      uintptr
+	prev_frees       uintptr
+	prev_alloc_bytes uintptr
+	prev_free_bytes  uintptr
 
-	recent_allocs		uintptr
-	recent_frees		uintptr
-	recent_alloc_bytes	uintptr
-	recent_free_bytes	uintptr
+	recent_allocs      uintptr
+	recent_frees       uintptr
+	recent_alloc_bytes uintptr
+	recent_free_bytes  uintptr
 }
 
 // A blockRecord is the bucket data for a bucket of type blockProfile,
 // part of the blocking profile.
 type blockRecord struct {
-	count	int64
-	cycles	int64
+	count  int64
+	cycles int64
 }
 
 // A StackRecord describes a single execution stack.
@@ -69,15 +69,15 @@ type StackRecord struct {
 // A MemProfileRecord describes the live objects allocated
 // by a particular call sequence (stack trace).
 type MemProfileRecord struct {
-	AllocBytes, FreeBytes		int64
-	AllocObjects, FreeObjects	int64
-	Stack0				[32]uintptr
+	AllocBytes, FreeBytes     int64
+	AllocObjects, FreeObjects int64
+	Stack0                    [32]uintptr
 }
 
 // BlockProfileRecord describes blocking events originated
 // at a particular call sequence (stack trace).
 type BlockProfileRecord struct {
-	Count	int64
-	Cycles	int64
+	Count  int64
+	Cycles int64
 	StackRecord
 }

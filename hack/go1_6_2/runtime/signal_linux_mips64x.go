@@ -12,6 +12,6 @@ import (
 )
 
 type sigctxt struct {
-	info	*siginfo
-	ctxt	unsafe.Pointer
+	info *siginfo
+	ctxt unsafe.Pointer
 }

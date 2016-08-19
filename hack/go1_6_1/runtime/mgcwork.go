@@ -10,8 +10,8 @@ import (
 )
 
 const (
-	_Debugwbufs	= false
-	_WorkbufSize	= 2048
+	_Debugwbufs  = false
+	_WorkbufSize = 2048
 )
 
 // A wbufptr holds a workbuf*, but protects it from write barriers.
@@ -44,22 +44,22 @@ type wbufptr uintptr
 // gcWork may locally hold GC work buffers. This can be done by
 // disabling preemption (systemstack or acquirem).
 type gcWork struct {
-	wbuf1, wbuf2	wbufptr
+	wbuf1, wbuf2 wbufptr
 
-	bytesMarked	uint64
+	bytesMarked uint64
 
-	scanWork	int64
+	scanWork int64
 }
 
 type workbufhdr struct {
-	node	lfnode
-	nobj	int
-	inuse	bool
-	log	[4]int
+	node  lfnode
+	nobj  int
+	inuse bool
+	log   [4]int
 }
 
 type workbuf struct {
 	workbufhdr
 
-	obj	[(_WorkbufSize - unsafe.Sizeof(workbufhdr{})) / sys.PtrSize]uintptr
+	obj [(_WorkbufSize - unsafe.Sizeof(workbufhdr{})) / sys.PtrSize]uintptr
 }

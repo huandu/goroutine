@@ -5,23 +5,23 @@
 package runtime
 
 const (
-	_ESRCH		= 3
-	_ETIMEDOUT	= 60
+	_ESRCH     = 3
+	_ETIMEDOUT = 60
 
-	_CLOCK_REALTIME		= 0
-	_CLOCK_VIRTUAL		= 1
-	_CLOCK_PROF		= 2
-	_CLOCK_MONOTONIC	= 3
+	_CLOCK_REALTIME  = 0
+	_CLOCK_VIRTUAL   = 1
+	_CLOCK_PROF      = 2
+	_CLOCK_MONOTONIC = 3
 )
 
 // From NetBSD's <sys/sysctl.h>
 const (
-	_CTL_HW		= 6
-	_HW_NCPU	= 3
+	_CTL_HW  = 6
+	_HW_NCPU = 3
 )
 
 type sigactiont struct {
-	sa_sigaction	uintptr
-	sa_mask		sigset
-	sa_flags	int32
+	sa_sigaction uintptr
+	sa_mask      sigset
+	sa_flags     int32
 }

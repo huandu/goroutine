@@ -23,11 +23,11 @@ var (
 )
 
 type Context struct {
-	GoSrc      string  // Path to go src root directory.
-	GoPackage  string  // Path to package src in go src directory.
+	GoSrc      string          // Path to go src root directory.
+	GoPackage  string          // Path to package src in go src directory.
 	Version    version.Version // Version number.
-	Output     string  // Path to output directory.
-	ImportPath string  // The prefix of import path for output directory.
+	Output     string          // Path to output directory.
+	ImportPath string          // The prefix of import path for output directory.
 }
 
 func init() {

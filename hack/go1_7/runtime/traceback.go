@@ -12,10 +12,10 @@ const usesLR = sys.MinFrameSize > 0
 
 // cgoTracebackArg is the type passed to cgoTraceback.
 type cgoTracebackArg struct {
-	context		uintptr
-	sigContext	uintptr
-	buf		*uintptr
-	max		uintptr
+	context    uintptr
+	sigContext uintptr
+	buf        *uintptr
+	max        uintptr
 }
 
 // cgoContextArg is the type passed to the context function.
@@ -25,11 +25,11 @@ type cgoContextArg struct {
 
 // cgoSymbolizerArg is the type passed to cgoSymbolizer.
 type cgoSymbolizerArg struct {
-	pc		uintptr
-	file		*byte
-	lineno		uintptr
-	funcName	*byte
-	entry		uintptr
-	more		uintptr
-	data		uintptr
+	pc       uintptr
+	file     *byte
+	lineno   uintptr
+	funcName *byte
+	entry    uintptr
+	more     uintptr
+	data     uintptr
 }

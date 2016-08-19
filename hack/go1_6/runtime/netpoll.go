@@ -19,30 +19,30 @@ package runtime
 //             and unparks the goroutine.
 // nil - nothing of the above.
 const (
-	pdReady	uintptr	= 1
-	pdWait	uintptr	= 2
+	pdReady uintptr = 1
+	pdWait  uintptr = 2
 )
 
 const pollBlockSize = 4 * 1024
 
 // Network poller descriptor.
 type pollDesc struct {
-	link	*pollDesc
+	link *pollDesc
 
-	lock	mutex
-	fd	uintptr
-	closing	bool
-	seq	uintptr
-	rg	uintptr
-	rt	timer
-	rd	int64
-	wg	uintptr
-	wt	timer
-	wd	int64
-	user	uint32
+	lock    mutex
+	fd      uintptr
+	closing bool
+	seq     uintptr
+	rg      uintptr
+	rt      timer
+	rd      int64
+	wg      uintptr
+	wt      timer
+	wd      int64
+	user    uint32
 }
 
 type pollCache struct {
-	lock	mutex
-	first	*pollDesc
+	lock  mutex
+	first *pollDesc
 }

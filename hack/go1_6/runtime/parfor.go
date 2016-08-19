@@ -12,30 +12,30 @@ import (
 
 // A parfor holds state for the parallel for operation.
 type parfor struct {
-	body	func(*parfor, uint32)
-	done	uint32
-	nthr	uint32
-	thrseq	uint32
-	cnt	uint32
-	wait	bool
+	body   func(*parfor, uint32)
+	done   uint32
+	nthr   uint32
+	thrseq uint32
+	cnt    uint32
+	wait   bool
 
-	thr	[]parforthread
+	thr []parforthread
 
-	nsteal		uint64
-	nstealcnt	uint64
-	nprocyield	uint64
-	nosyield	uint64
-	nsleep		uint64
+	nsteal     uint64
+	nstealcnt  uint64
+	nprocyield uint64
+	nosyield   uint64
+	nsleep     uint64
 }
 
 // A parforthread holds state for a single thread in the parallel for.
 type parforthread struct {
-	pos	uint64
+	pos uint64
 
-	nsteal		uint64
-	nstealcnt	uint64
-	nprocyield	uint64
-	nosyield	uint64
-	nsleep		uint64
-	pad		[sys.CacheLineSize]byte
+	nsteal     uint64
+	nstealcnt  uint64
+	nprocyield uint64
+	nosyield   uint64
+	nsleep     uint64
+	pad        [sys.CacheLineSize]byte
 }

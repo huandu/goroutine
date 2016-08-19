@@ -20,9 +20,9 @@ package runtime
 //		Wake up mp, which is or will soon be sleeping on its semaphore.
 //
 const (
-	locked	uintptr	= 1
+	locked uintptr = 1
 
-	active_spin	= 4
-	active_spin_cnt	= 30
-	passive_spin	= 1
+	active_spin     = 4
+	active_spin_cnt = 30
+	passive_spin    = 1
 )

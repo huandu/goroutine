@@ -8,7 +8,6 @@ import (
 	"runtime"
 	"unsafe"
 
-	"github.com/huandu/goroutine/version"
 	runtime1_5 "github.com/huandu/goroutine/hack/go1_5/runtime"
 	runtime1_5_1 "github.com/huandu/goroutine/hack/go1_5_1/runtime"
 	runtime1_5_2 "github.com/huandu/goroutine/hack/go1_5_2/runtime"
@@ -19,6 +18,7 @@ import (
 	runtime1_6_2 "github.com/huandu/goroutine/hack/go1_6_2/runtime"
 	runtime1_6_3 "github.com/huandu/goroutine/hack/go1_6_3/runtime"
 	runtime1_7 "github.com/huandu/goroutine/hack/go1_7/runtime"
+	"github.com/huandu/goroutine/version"
 )
 
 const (
@@ -77,16 +77,26 @@ func GoroutineId() int64 {
 	gp := getg()
 
 	switch versionCode {
-	case VERSION1_5: return (*runtime1_5.Goroutine)(gp).Goid()
-	case VERSION1_5_1: return (*runtime1_5_1.Goroutine)(gp).Goid()
-	case VERSION1_5_2: return (*runtime1_5_2.Goroutine)(gp).Goid()
-	case VERSION1_5_3: return (*runtime1_5_3.Goroutine)(gp).Goid()
-	case VERSION1_5_4: return (*runtime1_5_4.Goroutine)(gp).Goid()
-	case VERSION1_6: return (*runtime1_6.Goroutine)(gp).Goid()
-	case VERSION1_6_1: return (*runtime1_6_1.Goroutine)(gp).Goid()
-	case VERSION1_6_2: return (*runtime1_6_2.Goroutine)(gp).Goid()
-	case VERSION1_6_3: return (*runtime1_6_3.Goroutine)(gp).Goid()
-	case VERSION1_7: return (*runtime1_7.Goroutine)(gp).Goid()
+	case VERSION1_5:
+		return (*runtime1_5.Goroutine)(gp).Goid()
+	case VERSION1_5_1:
+		return (*runtime1_5_1.Goroutine)(gp).Goid()
+	case VERSION1_5_2:
+		return (*runtime1_5_2.Goroutine)(gp).Goid()
+	case VERSION1_5_3:
+		return (*runtime1_5_3.Goroutine)(gp).Goid()
+	case VERSION1_5_4:
+		return (*runtime1_5_4.Goroutine)(gp).Goid()
+	case VERSION1_6:
+		return (*runtime1_6.Goroutine)(gp).Goid()
+	case VERSION1_6_1:
+		return (*runtime1_6_1.Goroutine)(gp).Goid()
+	case VERSION1_6_2:
+		return (*runtime1_6_2.Goroutine)(gp).Goid()
+	case VERSION1_6_3:
+		return (*runtime1_6_3.Goroutine)(gp).Goid()
+	case VERSION1_7:
+		return (*runtime1_7.Goroutine)(gp).Goid()
 
 	default:
 		panic("unsupported go version " + runtime.Version())

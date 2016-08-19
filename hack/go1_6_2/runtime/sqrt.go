@@ -10,10 +10,10 @@
 package runtime
 
 const (
-	float64Mask	= 0x7FF
-	float64Shift	= 64 - 11 - 1
-	float64Bias	= 1023
-	float64NaN	= 0x7FF8000000000001
-	float64Inf	= 0x7FF0000000000000
-	maxFloat64	= 1.797693134862315708145274237317043567981e+308
+	float64Mask  = 0x7FF
+	float64Shift = 64 - 11 - 1
+	float64Bias  = 1023
+	float64NaN   = 0x7FF8000000000001
+	float64Inf   = 0x7FF0000000000000
+	maxFloat64   = 1.797693134862315708145274237317043567981e+308
 )

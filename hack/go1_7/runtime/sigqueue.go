@@ -29,7 +29,7 @@
 package runtime
 
 const (
-	sigIdle	= iota
+	sigIdle = iota
 	sigReceiving
 	sigSending
 )

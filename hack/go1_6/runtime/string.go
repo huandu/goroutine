@@ -15,12 +15,12 @@ const tmpStringBufSize = 32
 type tmpBuf [tmpStringBufSize]byte
 
 type stringStruct struct {
-	str	unsafe.Pointer
-	len	int
+	str unsafe.Pointer
+	len int
 }
 
 // Variant with *byte pointer type for DWARF debugging.
 type stringStructDWARF struct {
-	str	*byte
-	len	int
+	str *byte
+	len int
 }

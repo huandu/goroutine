@@ -9,6 +9,6 @@
 package runtime
 
 type sigTabT struct {
-	flags	int32
-	name	string
+	flags int32
+	name  string
 }

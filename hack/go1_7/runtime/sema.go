@@ -20,10 +20,10 @@
 package runtime
 
 type semaRoot struct {
-	lock	mutex
-	head	*sudog
-	tail	*sudog
-	nwait	uint32
+	lock  mutex
+	head  *sudog
+	tail  *sudog
+	nwait uint32
 }
 
 // Prime to not correlate with any user patterns.
@@ -33,11 +33,11 @@ const semTabSize = 251
 //
 // It must be kept in sync with the sync package.
 type notifyList struct {
-	wait	uint32
+	wait uint32
 
-	notify	uint32
+	notify uint32
 
-	lock	mutex
-	head	*sudog
-	tail	*sudog
+	lock mutex
+	head *sudog
+	tail *sudog
 }

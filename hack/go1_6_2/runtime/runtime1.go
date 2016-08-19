@@ -10,12 +10,12 @@ package runtime
 // are the "crash" and "all" settings and the remaining
 // bits are the traceback value (0 off, 1 on, 2 include system).
 const (
-	tracebackCrash	= 1 << iota
+	tracebackCrash = 1 << iota
 	tracebackAll
-	tracebackShift	= iota
+	tracebackShift = iota
 )
 
 type dbgVar struct {
-	name	string
-	value	*int32
+	name  string
+	value *int32
 }

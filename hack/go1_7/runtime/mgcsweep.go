@@ -8,13 +8,13 @@ package runtime
 
 // State of background sweep.
 type sweepdata struct {
-	lock	mutex
-	g	*g
-	parked	bool
-	started	bool
+	lock    mutex
+	g       *g
+	parked  bool
+	started bool
 
-	spanidx	uint32
+	spanidx uint32
 
-	nbgsweep	uint32
-	npausesweep	uint32
+	nbgsweep    uint32
+	npausesweep uint32
 }

@@ -5,6 +5,6 @@
 package main
 
 type Hacker interface {
-    Package() string // The package to hack.
-    Hack(pw *PackageWriter) // Hack a package.
+	Package() string        // The package to hack.
+	Hack(pw *PackageWriter) // Hack a package.
 }

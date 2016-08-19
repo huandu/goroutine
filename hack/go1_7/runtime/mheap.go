@@ -22,46 +22,46 @@ const minPhysPageSize = 4096
 // The heap itself is the "free[]" and "large" arrays,
 // but all the other global data is here too.
 type mheap struct {
-	lock		mutex
-	free		[_MaxMHeapList]mSpanList
-	freelarge	mSpanList
-	busy		[_MaxMHeapList]mSpanList
-	busylarge	mSpanList
-	allspans	**mspan
-	gcspans		**mspan
-	nspan		uint32
-	sweepgen	uint32
-	sweepdone	uint32
+	lock      mutex
+	free      [_MaxMHeapList]mSpanList
+	freelarge mSpanList
+	busy      [_MaxMHeapList]mSpanList
+	busylarge mSpanList
+	allspans  **mspan
+	gcspans   **mspan
+	nspan     uint32
+	sweepgen  uint32
+	sweepdone uint32
 
-	spans		**mspan
-	spans_mapped	uintptr
+	spans        **mspan
+	spans_mapped uintptr
 
-	pagesInUse		uint64
-	spanBytesAlloc		uint64
-	pagesSwept		uint64
-	sweepPagesPerByte	float64
+	pagesInUse        uint64
+	spanBytesAlloc    uint64
+	pagesSwept        uint64
+	sweepPagesPerByte float64
 
-	largefree	uint64
-	nlargefree	uint64
-	nsmallfree	[_NumSizeClasses]uint64
+	largefree  uint64
+	nlargefree uint64
+	nsmallfree [_NumSizeClasses]uint64
 
-	bitmap		uintptr
-	bitmap_mapped	uintptr
-	arena_start	uintptr
-	arena_used	uintptr
-	arena_end	uintptr
-	arena_reserved	bool
+	bitmap         uintptr
+	bitmap_mapped  uintptr
+	arena_start    uintptr
+	arena_used     uintptr
+	arena_end      uintptr
+	arena_reserved bool
 
-	central	[_NumSizeClasses]struct {
-		mcentral	mcentral
-		pad		[sys.CacheLineSize]byte
+	central [_NumSizeClasses]struct {
+		mcentral mcentral
+		pad      [sys.CacheLineSize]byte
 	}
 
-	spanalloc		fixalloc
-	cachealloc		fixalloc
-	specialfinalizeralloc	fixalloc
-	specialprofilealloc	fixalloc
-	speciallock		mutex
+	spanalloc             fixalloc
+	cachealloc            fixalloc
+	specialfinalizeralloc fixalloc
+	specialprofilealloc   fixalloc
+	speciallock           mutex
 }
 
 // An MSpan representing actual memory has state _MSpanInUse,
@@ -79,7 +79,7 @@ type mheap struct {
 //   stack or in-use to free. Because concurrent GC may read a pointer
 //   and then look up its span, the span state must be monotonic.
 const (
-	_MSpanInUse	= iota
+	_MSpanInUse = iota
 	_MSpanStack
 	_MSpanFree
 	_MSpanDead
@@ -89,82 +89,82 @@ const (
 //
 // Linked list structure is based on BSD's "tail queue" data structure.
 type mSpanList struct {
-	first	*mspan
-	last	**mspan
+	first *mspan
+	last  **mspan
 }
 
 type mspan struct {
-	next	*mspan
-	prev	**mspan
-	list	*mSpanList
+	next *mspan
+	prev **mspan
+	list *mSpanList
 
-	startAddr	uintptr
-	npages		uintptr
-	stackfreelist	gclinkptr
+	startAddr     uintptr
+	npages        uintptr
+	stackfreelist gclinkptr
 
-	freeindex	uintptr
+	freeindex uintptr
 
-	nelems	uintptr
+	nelems uintptr
 
-	allocCache	uint64
+	allocCache uint64
 
-	allocBits	*uint8
-	gcmarkBits	*uint8
+	allocBits  *uint8
+	gcmarkBits *uint8
 
-	sweepgen	uint32
-	divMul		uint32
-	allocCount	uint16
-	sizeclass	uint8
-	incache		bool
-	state		uint8
-	needzero	uint8
-	divShift	uint8
-	divShift2	uint8
-	elemsize	uintptr
-	unusedsince	int64
-	npreleased	uintptr
-	limit		uintptr
-	speciallock	mutex
-	specials	*special
-	baseMask	uintptr
+	sweepgen    uint32
+	divMul      uint32
+	allocCount  uint16
+	sizeclass   uint8
+	incache     bool
+	state       uint8
+	needzero    uint8
+	divShift    uint8
+	divShift2   uint8
+	elemsize    uintptr
+	unusedsince int64
+	npreleased  uintptr
+	limit       uintptr
+	speciallock mutex
+	specials    *special
+	baseMask    uintptr
 }
 
 const (
-	_KindSpecialFinalizer	= 1
-	_KindSpecialProfile	= 2
+	_KindSpecialFinalizer = 1
+	_KindSpecialProfile   = 2
 )
 
 type special struct {
-	next	*special
-	offset	uint16
-	kind	byte
+	next   *special
+	offset uint16
+	kind   byte
 }
 
 // The described object has a finalizer set for it.
 type specialfinalizer struct {
-	special	special
-	fn	*funcval
-	nret	uintptr
-	fint	*_type
-	ot	*ptrtype
+	special special
+	fn      *funcval
+	nret    uintptr
+	fint    *_type
+	ot      *ptrtype
 }
 
 // The described object is being heap profiled.
 type specialprofile struct {
-	special	special
-	b	*bucket
+	special special
+	b       *bucket
 }
 
 const gcBitsChunkBytes = uintptr(64 << 10)
 const gcBitsHeaderBytes = unsafe.Sizeof(gcBitsHeader{})
 
 type gcBitsHeader struct {
-	free	uintptr
-	next	uintptr
+	free uintptr
+	next uintptr
 }
 
 type gcBits struct {
-	free	uintptr
-	next	*gcBits
-	bits	[gcBitsChunkBytes - gcBitsHeaderBytes]uint8
+	free uintptr
+	next *gcBits
+	bits [gcBitsChunkBytes - gcBitsHeaderBytes]uint8
 }

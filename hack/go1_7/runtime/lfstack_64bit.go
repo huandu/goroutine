@@ -7,7 +7,7 @@
 package runtime
 
 const (
-	addrBits	= 48
+	addrBits = 48
 
-	cntBits	= 64 - addrBits + 3
+	cntBits = 64 - addrBits + 3
 )

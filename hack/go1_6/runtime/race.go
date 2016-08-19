@@ -12,10 +12,10 @@ package runtime
 const raceenabled = true
 
 type symbolizeContext struct {
-	pc	uintptr
-	fn	*byte
-	file	*byte
-	line	uintptr
-	off	uintptr
-	res	uintptr
+	pc   uintptr
+	fn   *byte
+	file *byte
+	line uintptr
+	off  uintptr
+	res  uintptr
 }

@@ -14,8 +14,8 @@ package runtime
 
 // Central list of free objects of a given size.
 type mcentral struct {
-	lock		mutex
-	sizeclass	int32
-	nonempty	mspan
-	empty		mspan
+	lock      mutex
+	sizeclass int32
+	nonempty  mspan
+	empty     mspan
 }

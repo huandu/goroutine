@@ -28,6 +28,6 @@
 package runtime
 
 const (
-	sign32	= 1 << (32 - 1)
-	sign64	= 1 << (64 - 1)
+	sign32 = 1 << (32 - 1)
+	sign64 = 1 << (64 - 1)
 )

@@ -5,11 +5,11 @@
 package runtime
 
 const (
-	_AT_NULL	= 0
-	_AT_PLATFORM	= 15
-	_AT_HWCAP	= 16
-	_AT_RANDOM	= 25
+	_AT_NULL     = 0
+	_AT_PLATFORM = 15
+	_AT_HWCAP    = 16
+	_AT_RANDOM   = 25
 
-	_HWCAP_VFP	= 1 << 6
-	_HWCAP_VFPv3	= 1 << 13
+	_HWCAP_VFP   = 1 << 6
+	_HWCAP_VFPv3 = 1 << 13
 )

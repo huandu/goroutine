@@ -51,36 +51,36 @@
 package runtime
 
 const (
-	numBuckets	= 1 << 10
-	logSize		= 1 << 17
-	assoc		= 4
-	maxCPUProfStack	= 64
+	numBuckets      = 1 << 10
+	logSize         = 1 << 17
+	assoc           = 4
+	maxCPUProfStack = 64
 )
 
 type cpuprofEntry struct {
-	count	uintptr
-	depth	int
-	stack	[maxCPUProfStack]uintptr
+	count uintptr
+	depth int
+	stack [maxCPUProfStack]uintptr
 }
 
 type cpuProfile struct {
-	on	bool
-	wait	note
-	count	uintptr
-	evicts	uintptr
-	lost	uintptr
+	on     bool
+	wait   note
+	count  uintptr
+	evicts uintptr
+	lost   uintptr
 
-	hash	[numBuckets]struct {
+	hash [numBuckets]struct {
 		entry [assoc]cpuprofEntry
 	}
 
-	log	[2][logSize / 2]uintptr
-	nlog	int
-	toggle	int32
-	handoff	uint32
+	log     [2][logSize / 2]uintptr
+	nlog    int
+	toggle  int32
+	handoff uint32
 
-	wtoggle		uint32
-	wholding	bool
-	flushing	bool
-	eodSent		bool
+	wtoggle  uint32
+	wholding bool
+	flushing bool
+	eodSent  bool
 }

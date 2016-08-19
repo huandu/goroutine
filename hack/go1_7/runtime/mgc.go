@@ -129,18 +129,18 @@ import (
 )
 
 const (
-	_DebugGC		= 0
-	_ConcurrentSweep	= true
-	_FinBlockSize		= 4 * 1024
+	_DebugGC         = 0
+	_ConcurrentSweep = true
+	_FinBlockSize    = 4 * 1024
 
-	sweepMinHeapDistance	= 1024 * 1024
+	sweepMinHeapDistance = 1024 * 1024
 )
 
 // defaultHeapMinimum is the value of heapminimum for GOGC==100.
 const defaultHeapMinimum = 4 << 20
 
 const (
-	_GCoff			= iota
+	_GCoff = iota
 	_GCmark
 	_GCmarktermination
 )
@@ -155,7 +155,7 @@ const (
 type gcMarkWorkerMode int
 
 const (
-	gcMarkWorkerDedicatedMode	gcMarkWorkerMode	= iota
+	gcMarkWorkerDedicatedMode gcMarkWorkerMode = iota
 
 	gcMarkWorkerFractionalMode
 
@@ -163,37 +163,37 @@ const (
 )
 
 type gcControllerState struct {
-	scanWork	int64
+	scanWork int64
 
-	bgScanCredit	int64
+	bgScanCredit int64
 
-	assistTime	int64
+	assistTime int64
 
-	dedicatedMarkTime	int64
+	dedicatedMarkTime int64
 
-	fractionalMarkTime	int64
+	fractionalMarkTime int64
 
-	idleMarkTime	int64
+	idleMarkTime int64
 
-	markStartTime	int64
+	markStartTime int64
 
-	heapGoal	uint64
+	heapGoal uint64
 
-	dedicatedMarkWorkersNeeded	int64
+	dedicatedMarkWorkersNeeded int64
 
-	assistWorkPerByte	float64
+	assistWorkPerByte float64
 
-	assistBytesPerWork	float64
+	assistBytesPerWork float64
 
-	fractionalUtilizationGoal	float64
+	fractionalUtilizationGoal float64
 
-	triggerRatio	float64
+	triggerRatio float64
 
-	_	[sys.CacheLineSize]byte
+	_ [sys.CacheLineSize]byte
 
-	fractionalMarkWorkersNeeded	int64
+	fractionalMarkWorkersNeeded int64
 
-	_	[sys.CacheLineSize]byte
+	_ [sys.CacheLineSize]byte
 }
 
 // gcGoalUtilization is the goal CPU utilization for background
@@ -221,7 +221,7 @@ const gcOverAssistWork = 64 << 10
 type gcMode int
 
 const (
-	gcBackgroundMode	gcMode	= iota
+	gcBackgroundMode gcMode = iota
 	gcForceMode
 	gcForceBlockMode
 )

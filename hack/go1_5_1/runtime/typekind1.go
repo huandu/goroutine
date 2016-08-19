@@ -5,7 +5,7 @@
 package runtime
 
 const (
-	_KindBool	= 1 + iota
+	_KindBool = 1 + iota
 	_KindInt
 	_KindInt8
 	_KindInt16
@@ -32,8 +32,8 @@ const (
 	_KindStruct
 	_KindUnsafePointer
 
-	_KindDirectIface	= 1 << 5
-	_KindGCProg		= 1 << 6
-	_KindNoPointers		= 1 << 7
-	_KindMask		= (1 << 5) - 1
+	_KindDirectIface = 1 << 5
+	_KindGCProg      = 1 << 6
+	_KindNoPointers  = 1 << 7
+	_KindMask        = (1 << 5) - 1
 )

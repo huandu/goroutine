@@ -71,14 +71,14 @@ import (
 )
 
 const (
-	bitPointer	= 1 << 0
-	bitMarked	= 1 << 4
+	bitPointer = 1 << 0
+	bitMarked  = 1 << 4
 
-	heapBitsShift	= 1
-	heapBitmapScale	= sys.PtrSize * (8 / 2)
+	heapBitsShift   = 1
+	heapBitmapScale = sys.PtrSize * (8 / 2)
 
-	bitMarkedAll	= bitMarked | bitMarked<<heapBitsShift | bitMarked<<(2*heapBitsShift) | bitMarked<<(3*heapBitsShift)
-	bitPointerAll	= bitPointer | bitPointer<<heapBitsShift | bitPointer<<(2*heapBitsShift) | bitPointer<<(3*heapBitsShift)
+	bitMarkedAll  = bitMarked | bitMarked<<heapBitsShift | bitMarked<<(2*heapBitsShift) | bitMarked<<(3*heapBitsShift)
+	bitPointerAll = bitPointer | bitPointer<<heapBitsShift | bitPointer<<(2*heapBitsShift) | bitPointer<<(3*heapBitsShift)
 )
 
 // heapBits provides access to the bitmap bits for a single heap word.
@@ -86,6 +86,6 @@ const (
 // can more easily inline calls to those methods and registerize the
 // struct fields independently.
 type heapBits struct {
-	bitp	*uint8
-	shift	uint32
+	bitp  *uint8
+	shift uint32
 }

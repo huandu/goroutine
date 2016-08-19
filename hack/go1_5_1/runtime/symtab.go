@@ -11,11 +11,11 @@ type Func struct {
 
 // funcdata.h
 const (
-	_PCDATA_StackMapIndex		= 0
-	_FUNCDATA_ArgsPointerMaps	= 0
-	_FUNCDATA_LocalsPointerMaps	= 1
-	_FUNCDATA_DeadValueMaps		= 2
-	_ArgsSizeUnknown		= -0x80000000
+	_PCDATA_StackMapIndex       = 0
+	_FUNCDATA_ArgsPointerMaps   = 0
+	_FUNCDATA_LocalsPointerMaps = 1
+	_FUNCDATA_DeadValueMaps     = 2
+	_ArgsSizeUnknown            = -0x80000000
 )
 
 // moduledata records information about the layout of the executable
@@ -24,27 +24,27 @@ const (
 // moduledata is stored in read-only memory; none of the pointers here
 // are visible to the garbage collector.
 type moduledata struct {
-	pclntable	[]byte
-	ftab		[]functab
-	filetab		[]uint32
-	findfunctab	uintptr
-	minpc, maxpc	uintptr
+	pclntable    []byte
+	ftab         []functab
+	filetab      []uint32
+	findfunctab  uintptr
+	minpc, maxpc uintptr
 
-	text, etext		uintptr
-	noptrdata, enoptrdata	uintptr
-	data, edata		uintptr
-	bss, ebss		uintptr
-	noptrbss, enoptrbss	uintptr
-	end, gcdata, gcbss	uintptr
+	text, etext           uintptr
+	noptrdata, enoptrdata uintptr
+	data, edata           uintptr
+	bss, ebss             uintptr
+	noptrbss, enoptrbss   uintptr
+	end, gcdata, gcbss    uintptr
 
-	typelinks	[]*_type
+	typelinks []*_type
 
-	modulename	string
-	modulehashes	[]modulehash
+	modulename   string
+	modulehashes []modulehash
 
-	gcdatamask, gcbssmask	bitvector
+	gcdatamask, gcbssmask bitvector
 
-	next	*moduledata
+	next *moduledata
 }
 
 // For each shared library a module links against, the linker creates an entry in the
@@ -52,14 +52,14 @@ type moduledata struct {
 // at link time and a pointer to the runtime abi hash. These are checked in
 // moduledataverify1 below.
 type modulehash struct {
-	modulename	string
-	linktimehash	string
-	runtimehash	*string
+	modulename   string
+	linktimehash string
+	runtimehash  *string
 }
 
 type functab struct {
-	entry	uintptr
-	funcoff	uintptr
+	entry   uintptr
+	funcoff uintptr
 }
 
 const minfunc = 16
@@ -74,14 +74,14 @@ const pcbucketsize = 256 * minfunc
 // index to find the target function.
 // This table uses 20 bytes for every 4096 bytes of code, or ~0.5% overhead.
 type findfuncbucket struct {
-	idx		uint32
-	subbuckets	[16]byte
+	idx        uint32
+	subbuckets [16]byte
 }
 
 const debugPcln = false
 
 type stackmap struct {
-	n		int32
-	nbit		int32
-	bytedata	[1]byte
+	n        int32
+	nbit     int32
+	bytedata [1]byte
 }

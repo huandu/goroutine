@@ -7,7 +7,7 @@ package runtime
 import "unsafe"
 
 const (
-	deferHeaderSize	= unsafe.Sizeof(_defer{})
-	minDeferAlloc	= (deferHeaderSize + 15) &^ 15
-	minDeferArgs	= minDeferAlloc - deferHeaderSize
+	deferHeaderSize = unsafe.Sizeof(_defer{})
+	minDeferAlloc   = (deferHeaderSize + 15) &^ 15
+	minDeferArgs    = minDeferAlloc - deferHeaderSize
 )

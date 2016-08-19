@@ -10,17 +10,17 @@ const _INVALID_HANDLE_VALUE = ^uintptr(0)
 
 // net_op must be the same as beginning of net.operation. Keep these in sync.
 type net_op struct {
-	o	overlapped
+	o overlapped
 
-	pd	*pollDesc
-	mode	int32
-	errno	int32
-	qty	uint32
+	pd    *pollDesc
+	mode  int32
+	errno int32
+	qty   uint32
 }
 
 type overlappedEntry struct {
-	key		uintptr
-	op		*net_op
-	internal	uintptr
-	qty		uint32
+	key      uintptr
+	op       *net_op
+	internal uintptr
+	qty      uint32
 }

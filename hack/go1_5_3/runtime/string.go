@@ -15,6 +15,6 @@ const tmpStringBufSize = 32
 type tmpBuf [tmpStringBufSize]byte
 
 type stringStruct struct {
-	str	unsafe.Pointer
-	len	int
+	str unsafe.Pointer
+	len int
 }

@@ -5,6 +5,6 @@
 package runtime
 
 type dbgVar struct {
-	name	string
-	value	*int32
+	name  string
+	value *int32
 }

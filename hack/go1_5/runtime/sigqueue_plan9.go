@@ -9,14 +9,14 @@ package runtime
 const qsize = 64
 
 type noteData struct {
-	s	[_ERRMAX]byte
-	n	int
+	s [_ERRMAX]byte
+	n int
 }
 
 type noteQueue struct {
-	lock	mutex
-	data	[qsize]noteData
-	ri	int
-	wi	int
-	full	bool
+	lock mutex
+	data [qsize]noteData
+	ri   int
+	wi   int
+	full bool
 }

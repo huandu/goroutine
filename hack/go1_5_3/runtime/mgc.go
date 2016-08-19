@@ -121,26 +121,26 @@
 package runtime
 
 const (
-	_DebugGC		= 0
-	_ConcurrentSweep	= true
-	_FinBlockSize		= 4 * 1024
-	_RootData		= 0
-	_RootBss		= 1
-	_RootFinalizers		= 2
-	_RootSpans		= 3
-	_RootFlushCaches	= 4
-	_RootCount		= 5
+	_DebugGC         = 0
+	_ConcurrentSweep = true
+	_FinBlockSize    = 4 * 1024
+	_RootData        = 0
+	_RootBss         = 1
+	_RootFinalizers  = 2
+	_RootSpans       = 3
+	_RootFlushCaches = 4
+	_RootCount       = 5
 
-	debugStackBarrier	= false
+	debugStackBarrier = false
 
-	sweepMinHeapDistance	= 1024 * 1024
+	sweepMinHeapDistance = 1024 * 1024
 )
 
 // defaultHeapMinimum is the value of heapminimum for GOGC==100.
 const defaultHeapMinimum = 4 << 20
 
 const (
-	_GCoff			= iota
+	_GCoff = iota
 	_GCstw
 	_GCscan
 	_GCmark
@@ -157,7 +157,7 @@ const (
 type gcMarkWorkerMode int
 
 const (
-	gcMarkWorkerDedicatedMode	gcMarkWorkerMode	= iota
+	gcMarkWorkerDedicatedMode gcMarkWorkerMode = iota
 
 	gcMarkWorkerFractionalMode
 
@@ -165,37 +165,37 @@ const (
 )
 
 type gcControllerState struct {
-	scanWork	int64
+	scanWork int64
 
-	bgScanCredit	int64
+	bgScanCredit int64
 
-	assistTime	int64
+	assistTime int64
 
-	dedicatedMarkTime	int64
+	dedicatedMarkTime int64
 
-	fractionalMarkTime	int64
+	fractionalMarkTime int64
 
-	idleMarkTime	int64
+	idleMarkTime int64
 
-	bgMarkStartTime	int64
+	bgMarkStartTime int64
 
-	assistStartTime	int64
+	assistStartTime int64
 
-	heapGoal	uint64
+	heapGoal uint64
 
-	dedicatedMarkWorkersNeeded	int64
+	dedicatedMarkWorkersNeeded int64
 
-	assistRatio	float64
+	assistRatio float64
 
-	fractionalUtilizationGoal	float64
+	fractionalUtilizationGoal float64
 
-	triggerRatio	float64
+	triggerRatio float64
 
-	_	[_CacheLineSize]byte
+	_ [_CacheLineSize]byte
 
-	fractionalMarkWorkersNeeded	int64
+	fractionalMarkWorkersNeeded int64
 
-	_	[_CacheLineSize]byte
+	_ [_CacheLineSize]byte
 }
 
 // gcGoalUtilization is the goal CPU utilization for background
@@ -215,15 +215,15 @@ const gcAssistTimeSlack = 5000
 
 // bgMarkSignal synchronizes the GC coordinator and background mark workers.
 type bgMarkSignal struct {
-	done	uint32
+	done uint32
 
-	lock	mutex
-	g	*g
-	wake	bool
+	lock mutex
+	g    *g
+	wake bool
 }
 
 const (
-	gcBackgroundMode	= iota
+	gcBackgroundMode = iota
 	gcForceMode
 	gcForceBlockMode
 )

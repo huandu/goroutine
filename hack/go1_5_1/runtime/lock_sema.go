@@ -22,9 +22,9 @@ package runtime
 //		Wake up mp, which is or will soon be sleeping on mp->waitsema.
 //
 const (
-	locked	uintptr	= 1
+	locked uintptr = 1
 
-	active_spin	= 4
-	active_spin_cnt	= 30
-	passive_spin	= 1
+	active_spin     = 4
+	active_spin_cnt = 30
+	passive_spin    = 1
 )

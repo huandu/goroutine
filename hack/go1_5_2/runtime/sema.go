@@ -20,10 +20,10 @@
 package runtime
 
 type semaRoot struct {
-	lock	mutex
-	head	*sudog
-	tail	*sudog
-	nwait	uint32
+	lock  mutex
+	head  *sudog
+	tail  *sudog
+	nwait uint32
 }
 
 // Prime to not correlate with any user patterns.
@@ -31,7 +31,7 @@ const semTabSize = 251
 
 // Synchronous semaphore for sync.Cond.
 type syncSema struct {
-	lock	mutex
-	head	*sudog
-	tail	*sudog
+	lock mutex
+	head *sudog
+	tail *sudog
 }

@@ -12,27 +12,27 @@ package runtime
 const raceenabled = true
 
 type symbolizeCodeContext struct {
-	pc	uintptr
-	fn	*byte
-	file	*byte
-	line	uintptr
-	off	uintptr
-	res	uintptr
+	pc   uintptr
+	fn   *byte
+	file *byte
+	line uintptr
+	off  uintptr
+	res  uintptr
 }
 
 const (
-	raceGetProcCmd	= iota
+	raceGetProcCmd = iota
 	raceSymbolizeCodeCmd
 	raceSymbolizeDataCmd
 )
 
 type symbolizeDataContext struct {
-	addr	uintptr
-	heap	uintptr
-	start	uintptr
-	size	uintptr
-	name	*byte
-	file	*byte
-	line	uintptr
-	res	uintptr
+	addr  uintptr
+	heap  uintptr
+	start uintptr
+	size  uintptr
+	name  *byte
+	file  *byte
+	line  uintptr
+	res   uintptr
 }

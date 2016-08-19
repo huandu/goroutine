@@ -11,7 +11,7 @@ import (
 
 // defined constants
 const (
-	_Gidle	= iota
+	_Gidle = iota
 
 	_Grunnable
 
@@ -29,15 +29,15 @@ const (
 
 	_Gcopystack
 
-	_Gscan		= 0x1000
-	_Gscanrunnable	= _Gscan + _Grunnable
-	_Gscanrunning	= _Gscan + _Grunning
-	_Gscansyscall	= _Gscan + _Gsyscall
-	_Gscanwaiting	= _Gscan + _Gwaiting
+	_Gscan         = 0x1000
+	_Gscanrunnable = _Gscan + _Grunnable
+	_Gscanrunning  = _Gscan + _Grunning
+	_Gscansyscall  = _Gscan + _Gsyscall
+	_Gscanwaiting  = _Gscan + _Gwaiting
 )
 
 const (
-	_Pidle		= iota
+	_Pidle = iota
 	_Prunning
 	_Psyscall
 	_Pgcstop
@@ -81,13 +81,13 @@ type funcval struct {
 }
 
 type iface struct {
-	tab	*itab
-	data	unsafe.Pointer
+	tab  *itab
+	data unsafe.Pointer
 }
 
 type eface struct {
-	_type	*_type
-	data	unsafe.Pointer
+	_type *_type
+	data  unsafe.Pointer
 }
 
 // A guintptr holds a goroutine pointer, but typed as a uintptr
@@ -116,13 +116,13 @@ type puintptr uintptr
 type muintptr uintptr
 
 type gobuf struct {
-	sp	uintptr
-	pc	uintptr
-	g	guintptr
-	ctxt	unsafe.Pointer
-	ret	sys.Uintreg
-	lr	uintptr
-	bp	uintptr
+	sp   uintptr
+	pc   uintptr
+	g    guintptr
+	ctxt unsafe.Pointer
+	ret  sys.Uintreg
+	lr   uintptr
+	bp   uintptr
 }
 
 // sudog represents a g in a wait list, such as for sending/receiving
@@ -136,214 +136,214 @@ type gobuf struct {
 // sudogs are allocated from a special pool. Use acquireSudog and
 // releaseSudog to allocate and free them.
 type sudog struct {
-	g		*g
-	selectdone	*uint32
-	next		*sudog
-	prev		*sudog
-	elem		unsafe.Pointer
+	g          *g
+	selectdone *uint32
+	next       *sudog
+	prev       *sudog
+	elem       unsafe.Pointer
 
-	releasetime	int64
-	ticket		uint32
-	waitlink	*sudog
-	c		*hchan
+	releasetime int64
+	ticket      uint32
+	waitlink    *sudog
+	c           *hchan
 }
 
 type gcstats struct {
-	nhandoff	uint64
-	nhandoffcnt	uint64
-	nprocyield	uint64
-	nosyield	uint64
-	nsleep		uint64
+	nhandoff    uint64
+	nhandoffcnt uint64
+	nprocyield  uint64
+	nosyield    uint64
+	nsleep      uint64
 }
 
 type libcall struct {
-	fn	uintptr
-	n	uintptr
-	args	uintptr
-	r1	uintptr
-	r2	uintptr
-	err	uintptr
+	fn   uintptr
+	n    uintptr
+	args uintptr
+	r1   uintptr
+	r2   uintptr
+	err  uintptr
 }
 
 // describes how to handle callback
 type wincallbackcontext struct {
-	gobody		unsafe.Pointer
-	argsize		uintptr
-	restorestack	uintptr
-	cleanstack	bool
+	gobody       unsafe.Pointer
+	argsize      uintptr
+	restorestack uintptr
+	cleanstack   bool
 }
 
 // Stack describes a Go execution stack.
 // The bounds of the stack are exactly [lo, hi),
 // with no implicit data structures on either side.
 type stack struct {
-	lo	uintptr
-	hi	uintptr
+	lo uintptr
+	hi uintptr
 }
 
 // stkbar records the state of a G's stack barrier.
 type stkbar struct {
-	savedLRPtr	uintptr
-	savedLRVal	uintptr
+	savedLRPtr uintptr
+	savedLRVal uintptr
 }
 
 type g struct {
-	stack		stack
-	stackguard0	uintptr
-	stackguard1	uintptr
+	stack       stack
+	stackguard0 uintptr
+	stackguard1 uintptr
 
-	_panic		*_panic
-	_defer		*_defer
-	m		*m
-	stackAlloc	uintptr
-	sched		gobuf
-	syscallsp	uintptr
-	syscallpc	uintptr
-	stkbar		[]stkbar
-	stkbarPos	uintptr
-	stktopsp	uintptr
-	param		unsafe.Pointer
-	atomicstatus	uint32
-	stackLock	uint32
-	goid		int64
-	waitsince	int64
-	waitreason	string
-	schedlink	guintptr
-	preempt		bool
-	paniconfault	bool
-	preemptscan	bool
-	gcscandone	bool
-	gcscanvalid	bool
-	throwsplit	bool
-	raceignore	int8
-	sysblocktraced	bool
-	sysexitticks	int64
-	traceseq	uint64
-	tracelastp	puintptr
-	lockedm		*m
-	sig		uint32
-	writebuf	[]byte
-	sigcode0	uintptr
-	sigcode1	uintptr
-	sigpc		uintptr
-	gopc		uintptr
-	startpc		uintptr
-	racectx		uintptr
-	waiting		*sudog
-	cgoCtxt		[]uintptr
+	_panic         *_panic
+	_defer         *_defer
+	m              *m
+	stackAlloc     uintptr
+	sched          gobuf
+	syscallsp      uintptr
+	syscallpc      uintptr
+	stkbar         []stkbar
+	stkbarPos      uintptr
+	stktopsp       uintptr
+	param          unsafe.Pointer
+	atomicstatus   uint32
+	stackLock      uint32
+	goid           int64
+	waitsince      int64
+	waitreason     string
+	schedlink      guintptr
+	preempt        bool
+	paniconfault   bool
+	preemptscan    bool
+	gcscandone     bool
+	gcscanvalid    bool
+	throwsplit     bool
+	raceignore     int8
+	sysblocktraced bool
+	sysexitticks   int64
+	traceseq       uint64
+	tracelastp     puintptr
+	lockedm        *m
+	sig            uint32
+	writebuf       []byte
+	sigcode0       uintptr
+	sigcode1       uintptr
+	sigpc          uintptr
+	gopc           uintptr
+	startpc        uintptr
+	racectx        uintptr
+	waiting        *sudog
+	cgoCtxt        []uintptr
 
-	gcRescan	int32
+	gcRescan int32
 
-	gcAssistBytes	int64
+	gcAssistBytes int64
 }
 
 type m struct {
-	g0	*g
-	morebuf	gobuf
-	divmod	uint32
+	g0      *g
+	morebuf gobuf
+	divmod  uint32
 
-	procid		uint64
-	gsignal		*g
-	sigmask		sigset
-	tls		[6]uintptr
-	mstartfn	func()
-	curg		*g
-	caughtsig	guintptr
-	p		puintptr
-	nextp		puintptr
-	id		int32
-	mallocing	int32
-	throwing	int32
-	preemptoff	string
-	locks		int32
-	softfloat	int32
-	dying		int32
-	profilehz	int32
-	helpgc		int32
-	spinning	bool
-	blocked		bool
-	inwb		bool
-	newSigstack	bool
-	printlock	int8
-	fastrand	uint32
-	ncgocall	uint64
-	ncgo		int32
-	cgoCallersUse	uint32
-	cgoCallers	*cgoCallers
-	park		note
-	alllink		*m
-	schedlink	muintptr
-	mcache		*mcache
-	lockedg		*g
-	createstack	[32]uintptr
-	freglo		[16]uint32
-	freghi		[16]uint32
-	fflag		uint32
-	locked		uint32
-	nextwaitm	uintptr
-	gcstats		gcstats
-	needextram	bool
-	traceback	uint8
-	waitunlockf	unsafe.Pointer
-	waitlock	unsafe.Pointer
-	waittraceev	byte
-	waittraceskip	int
-	startingtrace	bool
-	syscalltick	uint32
-	thread		uintptr
+	procid        uint64
+	gsignal       *g
+	sigmask       sigset
+	tls           [6]uintptr
+	mstartfn      func()
+	curg          *g
+	caughtsig     guintptr
+	p             puintptr
+	nextp         puintptr
+	id            int32
+	mallocing     int32
+	throwing      int32
+	preemptoff    string
+	locks         int32
+	softfloat     int32
+	dying         int32
+	profilehz     int32
+	helpgc        int32
+	spinning      bool
+	blocked       bool
+	inwb          bool
+	newSigstack   bool
+	printlock     int8
+	fastrand      uint32
+	ncgocall      uint64
+	ncgo          int32
+	cgoCallersUse uint32
+	cgoCallers    *cgoCallers
+	park          note
+	alllink       *m
+	schedlink     muintptr
+	mcache        *mcache
+	lockedg       *g
+	createstack   [32]uintptr
+	freglo        [16]uint32
+	freghi        [16]uint32
+	fflag         uint32
+	locked        uint32
+	nextwaitm     uintptr
+	gcstats       gcstats
+	needextram    bool
+	traceback     uint8
+	waitunlockf   unsafe.Pointer
+	waitlock      unsafe.Pointer
+	waittraceev   byte
+	waittraceskip int
+	startingtrace bool
+	syscalltick   uint32
+	thread        uintptr
 
-	libcall		libcall
-	libcallpc	uintptr
-	libcallsp	uintptr
-	libcallg	guintptr
-	syscall		libcall
+	libcall   libcall
+	libcallpc uintptr
+	libcallsp uintptr
+	libcallg  guintptr
+	syscall   libcall
 
 	mOS
 }
 
 type p struct {
-	lock	mutex
+	lock mutex
 
-	id		int32
-	status		uint32
-	link		puintptr
-	schedtick	uint32
-	syscalltick	uint32
-	m		muintptr
-	mcache		*mcache
-	racectx		uintptr
+	id          int32
+	status      uint32
+	link        puintptr
+	schedtick   uint32
+	syscalltick uint32
+	m           muintptr
+	mcache      *mcache
+	racectx     uintptr
 
-	deferpool	[5][]*_defer
-	deferpoolbuf	[5][32]*_defer
+	deferpool    [5][]*_defer
+	deferpoolbuf [5][32]*_defer
 
-	goidcache	uint64
-	goidcacheend	uint64
+	goidcache    uint64
+	goidcacheend uint64
 
-	runqhead	uint32
-	runqtail	uint32
-	runq		[256]guintptr
+	runqhead uint32
+	runqtail uint32
+	runq     [256]guintptr
 
-	runnext	guintptr
+	runnext guintptr
 
-	gfree		*g
-	gfreecnt	int32
+	gfree    *g
+	gfreecnt int32
 
-	sudogcache	[]*sudog
-	sudogbuf	[128]*sudog
+	sudogcache []*sudog
+	sudogbuf   [128]*sudog
 
-	tracebuf	traceBufPtr
+	tracebuf traceBufPtr
 
-	palloc	persistentAlloc
+	palloc persistentAlloc
 
-	gcAssistTime		int64
-	gcBgMarkWorker		guintptr
-	gcMarkWorkerMode	gcMarkWorkerMode
+	gcAssistTime     int64
+	gcBgMarkWorker   guintptr
+	gcMarkWorkerMode gcMarkWorkerMode
 
-	gcw	gcWork
+	gcw gcWork
 
-	runSafePointFn	uint32
+	runSafePointFn uint32
 
-	pad	[64]byte
+	pad [64]byte
 }
 
 const (
@@ -351,52 +351,52 @@ const (
 )
 
 type schedt struct {
-	goidgen		uint64
-	lastpoll	uint64
+	goidgen  uint64
+	lastpoll uint64
 
-	lock	mutex
+	lock mutex
 
-	midle		muintptr
-	nmidle		int32
-	nmidlelocked	int32
-	mcount		int32
-	maxmcount	int32
+	midle        muintptr
+	nmidle       int32
+	nmidlelocked int32
+	mcount       int32
+	maxmcount    int32
 
-	ngsys	uint32
+	ngsys uint32
 
-	pidle		puintptr
-	npidle		uint32
-	nmspinning	uint32
+	pidle      puintptr
+	npidle     uint32
+	nmspinning uint32
 
-	runqhead	guintptr
-	runqtail	guintptr
-	runqsize	int32
+	runqhead guintptr
+	runqtail guintptr
+	runqsize int32
 
-	gflock		mutex
-	gfreeStack	*g
-	gfreeNoStack	*g
-	ngfree		int32
+	gflock       mutex
+	gfreeStack   *g
+	gfreeNoStack *g
+	ngfree       int32
 
-	sudoglock	mutex
-	sudogcache	*sudog
+	sudoglock  mutex
+	sudogcache *sudog
 
-	deferlock	mutex
-	deferpool	[5]*_defer
+	deferlock mutex
+	deferpool [5]*_defer
 
-	gcwaiting	uint32
-	stopwait	int32
-	stopnote	note
-	sysmonwait	uint32
-	sysmonnote	note
+	gcwaiting  uint32
+	stopwait   int32
+	stopnote   note
+	sysmonwait uint32
+	sysmonnote note
 
-	safePointFn	func(*p)
-	safePointWait	int32
-	safePointNote	note
+	safePointFn   func(*p)
+	safePointWait int32
+	safePointNote note
 
-	profilehz	int32
+	profilehz int32
 
-	procresizetime	int64
-	totaltime	int64
+	procresizetime int64
+	totaltime      int64
 }
 
 // The m.locked word holds two pieces of state counting active calls to LockOSThread/lockOSThread.
@@ -407,17 +407,17 @@ type schedt struct {
 // Internal locks can be recursive. For instance, a lock for cgo can occur while the main
 // goroutine is holding the lock during the initialization phase.
 const (
-	_LockExternal	= 1
-	_LockInternal	= 2
+	_LockExternal = 1
+	_LockInternal = 2
 )
 
 type sigtabtt struct {
-	flags	int32
-	name	*int8
+	flags int32
+	name  *int8
 }
 
 const (
-	_SigNotify	= 1 << iota
+	_SigNotify = 1 << iota
 	_SigKill
 	_SigThrow
 	_SigPanic
@@ -433,17 +433,17 @@ const (
 // Keep in sync with linker
 // and with package debug/gosym and with symtab.go in package runtime.
 type _func struct {
-	entry	uintptr
-	nameoff	int32
+	entry   uintptr
+	nameoff int32
 
-	args	int32
-	_	int32
+	args int32
+	_    int32
 
-	pcsp		int32
-	pcfile		int32
-	pcln		int32
-	npcdata		int32
-	nfuncdata	int32
+	pcsp      int32
+	pcfile    int32
+	pcln      int32
+	npcdata   int32
+	nfuncdata int32
 }
 
 // layout of Itab known to compilers
@@ -451,63 +451,63 @@ type _func struct {
 // Needs to be in sync with
 // ../cmd/compile/internal/gc/reflect.go:/^func.dumptypestructs.
 type itab struct {
-	inter	*interfacetype
-	_type	*_type
-	link	*itab
-	bad	int32
-	unused	int32
-	fun	[1]uintptr
+	inter  *interfacetype
+	_type  *_type
+	link   *itab
+	bad    int32
+	unused int32
+	fun    [1]uintptr
 }
 
 // Lock-free stack node.
 // // Also known to export_test.go.
 type lfnode struct {
-	next	uint64
-	pushcnt	uintptr
+	next    uint64
+	pushcnt uintptr
 }
 
 type forcegcstate struct {
-	lock	mutex
-	g	*g
-	idle	uint32
+	lock mutex
+	g    *g
+	idle uint32
 }
 
 // deferred subroutine calls
 type _defer struct {
-	siz	int32
-	started	bool
-	sp	uintptr
-	pc	uintptr
-	fn	*funcval
-	_panic	*_panic
-	link	*_defer
+	siz     int32
+	started bool
+	sp      uintptr
+	pc      uintptr
+	fn      *funcval
+	_panic  *_panic
+	link    *_defer
 }
 
 // panics
 type _panic struct {
-	argp		unsafe.Pointer
-	arg		interface{}
-	link		*_panic
-	recovered	bool
-	aborted		bool
+	argp      unsafe.Pointer
+	arg       interface{}
+	link      *_panic
+	recovered bool
+	aborted   bool
 }
 
 // stack traces
 type stkframe struct {
-	fn		*_func
-	pc		uintptr
-	continpc	uintptr
-	lr		uintptr
-	sp		uintptr
-	fp		uintptr
-	varp		uintptr
-	argp		uintptr
-	arglen		uintptr
-	argmap		*bitvector
+	fn       *_func
+	pc       uintptr
+	continpc uintptr
+	lr       uintptr
+	sp       uintptr
+	fp       uintptr
+	varp     uintptr
+	argp     uintptr
+	arglen   uintptr
+	argmap   *bitvector
 }
 
 const (
-	_TraceRuntimeFrames	= 1 << iota
+	_TraceRuntimeFrames = 1 << iota
 	_TraceTrap
 	_TraceJumpStack
 )

@@ -9,6 +9,6 @@ import (
 )
 
 const (
-	_PAGE_SIZE	= sys.PhysPageSize
-	_EACCES		= 13
+	_PAGE_SIZE = sys.PhysPageSize
+	_EACCES    = 13
 )

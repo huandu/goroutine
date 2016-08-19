@@ -5,6 +5,6 @@
 package runtime
 
 const (
-	_PAGE_SIZE	= _PhysPageSize
-	_EACCES		= 13
+	_PAGE_SIZE = _PhysPageSize
+	_EACCES    = 13
 )

@@ -9,22 +9,22 @@ import "unsafe"
 // Per-thread (in Go, per-P) cache for small objects.
 // No locking needed because it is per-thread (per-P).
 type mcache struct {
-	next_sample		int32
-	local_cachealloc	uintptr
-	local_scan		uintptr
+	next_sample      int32
+	local_cachealloc uintptr
+	local_scan       uintptr
 
-	tiny			unsafe.Pointer
-	tinyoffset		uintptr
-	local_tinyallocs	uintptr
+	tiny             unsafe.Pointer
+	tinyoffset       uintptr
+	local_tinyallocs uintptr
 
-	alloc	[_NumSizeClasses]*mspan
+	alloc [_NumSizeClasses]*mspan
 
-	stackcache	[_NumStackOrders]stackfreelist
+	stackcache [_NumStackOrders]stackfreelist
 
-	local_nlookup		uintptr
-	local_largefree		uintptr
-	local_nlargefree	uintptr
-	local_nsmallfree	[_NumSizeClasses]uintptr
+	local_nlookup    uintptr
+	local_largefree  uintptr
+	local_nlargefree uintptr
+	local_nsmallfree [_NumSizeClasses]uintptr
 }
 
 // A gclink is a node in a linked list of blocks, like mlink,
@@ -42,6 +42,6 @@ type gclink struct {
 type gclinkptr uintptr
 
 type stackfreelist struct {
-	list	gclinkptr
-	size	uintptr
+	list gclinkptr
+	size uintptr
 }

@@ -9,11 +9,11 @@
 package runtime
 
 const (
-	_CPSR		= 14
-	_FLAGS_N	= 1 << 31
-	_FLAGS_Z	= 1 << 30
-	_FLAGS_C	= 1 << 29
-	_FLAGS_V	= 1 << 28
+	_CPSR    = 14
+	_FLAGS_N = 1 << 31
+	_FLAGS_Z = 1 << 30
+	_FLAGS_C = 1 << 29
+	_FLAGS_V = 1 << 28
 )
 
 const _FAULT = 0x80000000

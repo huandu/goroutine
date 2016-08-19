@@ -5,6 +5,6 @@
 package runtime
 
 const (
-	_AT_NULL	= 0
-	_AT_RANDOM	= 25
+	_AT_NULL   = 0
+	_AT_RANDOM = 25
 )

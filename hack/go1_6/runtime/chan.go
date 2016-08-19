@@ -9,26 +9,26 @@ import (
 )
 
 const (
-	maxAlign	= 8
-	hchanSize	= unsafe.Sizeof(hchan{}) + uintptr(-int(unsafe.Sizeof(hchan{}))&(maxAlign-1))
-	debugChan	= false
+	maxAlign  = 8
+	hchanSize = unsafe.Sizeof(hchan{}) + uintptr(-int(unsafe.Sizeof(hchan{}))&(maxAlign-1))
+	debugChan = false
 )
 
 type hchan struct {
-	qcount		uint
-	dataqsiz	uint
-	buf		unsafe.Pointer
-	elemsize	uint16
-	closed		uint32
-	elemtype	*_type
-	sendx		uint
-	recvx		uint
-	recvq		waitq
-	sendq		waitq
-	lock		mutex
+	qcount   uint
+	dataqsiz uint
+	buf      unsafe.Pointer
+	elemsize uint16
+	closed   uint32
+	elemtype *_type
+	sendx    uint
+	recvx    uint
+	recvq    waitq
+	sendq    waitq
+	lock     mutex
 }
 
 type waitq struct {
-	first	*sudog
-	last	*sudog
+	first *sudog
+	last  *sudog
 }

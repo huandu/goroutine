@@ -52,8 +52,8 @@ package runtime
 // http://ridiculousfish.com/blog/posts/labor-of-division-episode-i.html
 // http://ridiculousfish.com/blog/posts/labor-of-division-episode-iii.html
 type divMagic struct {
-	shift		uint8
-	mul		uint32
-	shift2		uint8
-	baseMask	uintptr
+	shift    uint8
+	mul      uint32
+	shift2   uint8
+	baseMask uintptr
 }

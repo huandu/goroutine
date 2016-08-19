@@ -11,11 +11,11 @@ package runtime
 // For GOOS=nacl, package syscall knows the layout of this structure.
 // If this struct changes, adjust ../syscall/net_nacl.go:/runtimeTimer.
 type timer struct {
-	i	int
+	i int
 
-	when	int64
-	period	int64
-	f	func(interface{}, uintptr)
-	arg	interface{}
-	seq	uintptr
+	when   int64
+	period int64
+	f      func(interface{}, uintptr)
+	arg    interface{}
+	seq    uintptr
 }

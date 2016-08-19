@@ -5,6 +5,6 @@
 package runtime
 
 const (
-	_EACCES	= 13
-	_EINVAL	= 22
+	_EACCES = 13
+	_EINVAL = 22
 )

@@ -17,9 +17,9 @@ const (
 const freezeStopWait = 0x7fffffff
 
 type cgothreadstart struct {
-	g	guintptr
-	tls	*uint64
-	fn	unsafe.Pointer
+	g   guintptr
+	tls *uint64
+	fn  unsafe.Pointer
 }
 
 // forcePreemptNS is the time slice given to a G before it is
@@ -42,13 +42,13 @@ const randomizeScheduler = raceenabled
 // The algorithm is based on the fact that if we have X such that X and GOMAXPROCS
 // are coprime, then a sequences of (i + X) % GOMAXPROCS gives the required enumeration.
 type randomOrder struct {
-	count		uint32
-	coprimes	[]uint32
+	count    uint32
+	coprimes []uint32
 }
 
 type randomEnum struct {
-	i	uint32
-	count	uint32
-	pos	uint32
-	inc	uint32
+	i     uint32
+	count uint32
+	pos   uint32
+	inc   uint32
 }

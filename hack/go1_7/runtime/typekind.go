@@ -5,7 +5,7 @@
 package runtime
 
 const (
-	kindBool	= 1 + iota
+	kindBool = 1 + iota
 	kindInt
 	kindInt8
 	kindInt16
@@ -32,8 +32,8 @@ const (
 	kindStruct
 	kindUnsafePointer
 
-	kindDirectIface	= 1 << 5
-	kindGCProg	= 1 << 6
-	kindNoPointers	= 1 << 7
-	kindMask	= (1 << 5) - 1
+	kindDirectIface = 1 << 5
+	kindGCProg      = 1 << 6
+	kindNoPointers  = 1 << 7
+	kindMask        = (1 << 5) - 1
 )

@@ -5,10 +5,10 @@
 package runtime
 
 const (
-	_NSIG		= 32
-	_SI_USER	= 0
-	_SIG_BLOCK	= 1
-	_SIG_UNBLOCK	= 2
-	_SIG_SETMASK	= 3
-	_SS_DISABLE	= 4
+	_NSIG        = 32
+	_SI_USER     = 0
+	_SIG_BLOCK   = 1
+	_SIG_UNBLOCK = 2
+	_SIG_SETMASK = 3
+	_SS_DISABLE  = 4
 )

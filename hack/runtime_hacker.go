@@ -4,26 +4,26 @@
 
 package main
 
-type RuntimeHacker struct {}
+type RuntimeHacker struct{}
 
 func (h *RuntimeHacker) Package() string {
-    return "runtime"
+	return "runtime"
 }
 
 func (h *RuntimeHacker) Hack(pw *PackageWriter) {
-    h.genHackedtypes(pw)
+	h.genHackedtypes(pw)
 }
 
 func (h *RuntimeHacker) genHackedtypes(pw *PackageWriter) {
-    file, err := pw.CreateFile("hackedtypes.go")
+	file, err := pw.CreateFile("hackedtypes.go")
 
-    if err != nil {
-        panic(err)
-    }
+	if err != nil {
+		panic(err)
+	}
 
-    defer file.Close()
-    file.WriteString(pw.Copyright)
-    file.WriteString(`
+	defer file.Close()
+	file.WriteString(pw.Copyright)
+	file.WriteString(`
 package runtime
 
 // Goroutine is the internal type represents a goroutine.

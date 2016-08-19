@@ -35,20 +35,20 @@ type wbufptr uintptr
 // gcWork may locally hold GC work buffers. This can be done by
 // disabling preemption (systemstack or acquirem).
 type gcWork struct {
-	wbuf1, wbuf2	wbufptr
+	wbuf1, wbuf2 wbufptr
 
-	bytesMarked	uint64
+	bytesMarked uint64
 
-	scanWork	int64
+	scanWork int64
 }
 
 type workbufhdr struct {
-	node	lfnode
-	nobj	int
+	node lfnode
+	nobj int
 }
 
 type workbuf struct {
 	workbufhdr
 
-	obj	[(_WorkbufSize - unsafe.Sizeof(workbufhdr{})) / sys.PtrSize]uintptr
+	obj [(_WorkbufSize - unsafe.Sizeof(workbufhdr{})) / sys.PtrSize]uintptr
 }

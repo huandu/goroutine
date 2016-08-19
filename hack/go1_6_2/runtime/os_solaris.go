@@ -5,8 +5,8 @@
 package runtime
 
 type mts struct {
-	tv_sec	int64
-	tv_nsec	int64
+	tv_sec  int64
+	tv_nsec int64
 }
 
 type mscratch struct {
@@ -14,11 +14,11 @@ type mscratch struct {
 }
 
 type mOS struct {
-	waitsema	uintptr
-	perrno		*int32
+	waitsema uintptr
+	perrno   *int32
 
-	ts	mts
-	scratch	mscratch
+	ts      mts
+	scratch mscratch
 }
 
 type libcFunc uintptr

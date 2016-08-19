@@ -8,12 +8,12 @@ import (
 	"fmt"
 	"go/ast"
 	"go/parser"
-	"go/token"
 	"go/printer"
+	"go/token"
 	"os"
 	"path/filepath"
-	"strings"
 	"regexp"
+	"strings"
 )
 
 var reBuildIgnoreFlag = regexp.MustCompile(`^/(/|\*)[[:blank:]]*\+build[[:blank:]]+ignore`)
@@ -33,7 +33,7 @@ type Generator struct {
 	context    *Context
 	parsedPkgs map[string]bool
 	pkgs       []string
-	hackers map[string]Hacker
+	hackers    map[string]Hacker
 }
 
 func NewGenerator(context *Context, hackers ...Hacker) *Generator {
@@ -52,7 +52,7 @@ func NewGenerator(context *Context, hackers ...Hacker) *Generator {
 		context:    context,
 		parsedPkgs: parsedPkgs,
 		pkgs:       pkgs,
-		hackers: hackersMap,
+		hackers:    hackersMap,
 	}
 }
 
@@ -84,16 +84,16 @@ func (g *Generator) parsePkg(pkg string) {
 
 	logDebugf("Parsed package `%v`...", pkg)
 
-    if _, ok := pkgs["main"]; ok {
-        delete(pkgs, "main")
-    }
+	if _, ok := pkgs["main"]; ok {
+		delete(pkgs, "main")
+	}
 
 	if len(pkgs) != 1 {
-        keys := []string{}
+		keys := []string{}
 
-        for k, _ := range pkgs {
-            keys = append(keys, k)
-        }
+		for k, _ := range pkgs {
+			keys = append(keys, k)
+		}
 
 		panic(fmt.Errorf("there must be only one package name in a package. [pkgs:%v]", strings.Join(keys, ", ")))
 	}
@@ -149,7 +149,7 @@ FilesLoop:
 			if importName == nil {
 				segments := strings.Split(importPath, "/")
 				importName = &ast.Ident{
-					Name: segments[len(segments) - 1],
+					Name: segments[len(segments)-1],
 				}
 			}
 
@@ -187,20 +187,20 @@ FilesLoop:
 					}
 
 					switch n := node.(type) {
-                    case *ast.SelectorExpr:
+					case *ast.SelectorExpr:
 						if _, ok := n.X.(*ast.Ident); !ok {
 							break
 						}
 
-                        pkgName := n.X.(*ast.Ident).Name
-                        typeName := n.Sel.Name
+						pkgName := n.X.(*ast.Ident).Name
+						typeName := n.Sel.Name
 
 						// Ignore entire type spec if it contains any type imported from C.
-                        if pkgName == "C" {
+						if pkgName == "C" {
 							logErrorf("It's not possible to parsee C type `%v.%v` for type. [type:%v]", pkgName, typeName, spec)
 							needWalk = false
-                            break
-                        }
+							break
+						}
 
 						if _, ok := usedImports[pkgName]; !ok {
 							importPath, ok := importPathMap[pkgName]
@@ -239,7 +239,7 @@ FilesLoop:
 			continue
 		}
 
-		hackedDecls := make([]ast.Decl, 0, len(neededDecls) + len(allImportDecls))
+		hackedDecls := make([]ast.Decl, 0, len(neededDecls)+len(allImportDecls))
 		hackedImportSpecs := make([]*ast.ImportSpec, 0, len(allImportDecls))
 		hackedComments := make([]*ast.CommentGroup, 0, len(f.Comments))
 

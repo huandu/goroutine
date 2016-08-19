@@ -7,7 +7,7 @@ package sys
 type ArchFamilyType int
 
 const (
-	AMD64	ArchFamilyType	= iota
+	AMD64 ArchFamilyType = iota
 	ARM
 	ARM64
 	I386

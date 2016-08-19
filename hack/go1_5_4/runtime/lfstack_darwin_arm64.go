@@ -8,6 +8,6 @@ package runtime
 // bottom, because node must be pointer-aligned, giving a total of 19 bits
 // of count.
 const (
-	addrBits	= 48
-	cntBits		= 64 - addrBits + 3
+	addrBits = 48
+	cntBits  = 64 - addrBits + 3
 )

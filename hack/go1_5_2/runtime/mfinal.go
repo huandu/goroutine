@@ -9,18 +9,18 @@ package runtime
 import "unsafe"
 
 type finblock struct {
-	alllink	*finblock
-	next	*finblock
-	cnt	int32
-	_	int32
-	fin	[(_FinBlockSize - 2*ptrSize - 2*4) / unsafe.Sizeof(finalizer{})]finalizer
+	alllink *finblock
+	next    *finblock
+	cnt     int32
+	_       int32
+	fin     [(_FinBlockSize - 2*ptrSize - 2*4) / unsafe.Sizeof(finalizer{})]finalizer
 }
 
 // NOTE: Layout known to queuefinalizer.
 type finalizer struct {
-	fn	*funcval
-	arg	unsafe.Pointer
-	nret	uintptr
-	fint	*_type
-	ot	*ptrtype
+	fn   *funcval
+	arg  unsafe.Pointer
+	nret uintptr
+	fint *_type
+	ot   *ptrtype
 }

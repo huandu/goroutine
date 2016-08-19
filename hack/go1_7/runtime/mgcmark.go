@@ -7,22 +7,22 @@
 package runtime
 
 const (
-	fixedRootFinalizers	= iota
+	fixedRootFinalizers = iota
 	fixedRootFlushCaches
 	fixedRootFreeGStacks
 	fixedRootCount
 
-	rootBlockBytes	= 256 << 10
+	rootBlockBytes = 256 << 10
 
-	rootBlockSpans	= 8 * 1024
+	rootBlockSpans = 8 * 1024
 )
 
 type gcDrainFlags int
 
 const (
-	gcDrainUntilPreempt	gcDrainFlags	= 1 << iota
+	gcDrainUntilPreempt gcDrainFlags = 1 << iota
 	gcDrainNoBlock
 	gcDrainFlushBgCredit
 
-	gcDrainBlock	gcDrainFlags	= 0
+	gcDrainBlock gcDrainFlags = 0
 )

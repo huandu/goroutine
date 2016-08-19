@@ -17,9 +17,9 @@ const (
 const freezeStopWait = 0x7fffffff
 
 type cgothreadstart struct {
-	g	guintptr
-	tls	*uint64
-	fn	unsafe.Pointer
+	g   guintptr
+	tls *uint64
+	fn  unsafe.Pointer
 }
 
 // forcePreemptNS is the time slice given to a G before it is

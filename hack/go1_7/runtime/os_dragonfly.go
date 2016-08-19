@@ -5,13 +5,13 @@
 package runtime
 
 const (
-	_NSIG		= 33
-	_SI_USER	= 0
-	_SS_DISABLE	= 4
-	_RLIMIT_AS	= 10
-	_SIG_BLOCK	= 1
-	_SIG_UNBLOCK	= 2
-	_SIG_SETMASK	= 3
+	_NSIG        = 33
+	_SI_USER     = 0
+	_SS_DISABLE  = 4
+	_RLIMIT_AS   = 10
+	_SIG_BLOCK   = 1
+	_SIG_UNBLOCK = 2
+	_SIG_SETMASK = 3
 )
 
 type mOS struct{}
@@ -20,12 +20,12 @@ const stackSystem = 0
 
 // From DragonFly's <sys/sysctl.h>
 const (
-	_CTL_HW		= 6
-	_HW_NCPU	= 3
+	_CTL_HW  = 6
+	_HW_NCPU = 3
 )
 
 type sigactiont struct {
-	sa_sigaction	uintptr
-	sa_flags	int32
-	sa_mask		sigset
+	sa_sigaction uintptr
+	sa_flags     int32
+	sa_mask      sigset
 }

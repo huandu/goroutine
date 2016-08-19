@@ -7,9 +7,9 @@ package goroutine
 import (
 	"fmt"
 	"math/rand"
+	"sort"
 	"testing"
 	"time"
-	"sort"
 )
 
 type Int64Slice []int64
@@ -67,7 +67,7 @@ func TestGoroutineIdConsistency(t *testing.T) {
 	sort.Sort(goids)
 
 	for i := 1; i < len(goids); i++ {
-		if goids[i - 1] == goids[i] {
+		if goids[i-1] == goids[i] {
 			t.Fatalf("Found duplicated goid. [goid:%v]", goids[i])
 		}
 	}

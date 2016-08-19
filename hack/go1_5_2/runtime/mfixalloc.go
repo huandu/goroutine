@@ -19,14 +19,14 @@ import "unsafe"
 // Callers can keep state in the object but the first word is
 // smashed by freeing and reallocating.
 type fixalloc struct {
-	size	uintptr
-	first	unsafe.Pointer
-	arg	unsafe.Pointer
-	list	*mlink
-	chunk	*byte
-	nchunk	uint32
-	inuse	uintptr
-	stat	*uint64
+	size   uintptr
+	first  unsafe.Pointer
+	arg    unsafe.Pointer
+	list   *mlink
+	chunk  *byte
+	nchunk uint32
+	inuse  uintptr
+	stat   *uint64
 }
 
 // A generic linked list of blocks.  (Typically the block is bigger than sizeof(MLink).)

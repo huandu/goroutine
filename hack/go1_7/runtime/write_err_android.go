@@ -12,7 +12,7 @@ package runtime
 type loggerType int32
 
 const (
-	unknown	loggerType	= iota
+	unknown loggerType = iota
 	legacy
 	logd
 )

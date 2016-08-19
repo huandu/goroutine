@@ -85,58 +85,58 @@ import (
 )
 
 const (
-	debugMalloc	= false
+	debugMalloc = false
 
-	maxTinySize	= _TinySize
-	tinySizeClass	= _TinySizeClass
-	maxSmallSize	= _MaxSmallSize
+	maxTinySize   = _TinySize
+	tinySizeClass = _TinySizeClass
+	maxSmallSize  = _MaxSmallSize
 
-	pageShift	= _PageShift
-	pageSize	= _PageSize
-	pageMask	= _PageMask
+	pageShift = _PageShift
+	pageSize  = _PageSize
+	pageMask  = _PageMask
 
-	maxObjsPerSpan	= pageSize / 8
+	maxObjsPerSpan = pageSize / 8
 
-	mSpanInUse	= _MSpanInUse
+	mSpanInUse = _MSpanInUse
 
-	concurrentSweep	= _ConcurrentSweep
+	concurrentSweep = _ConcurrentSweep
 )
 
 const (
-	_PageShift	= 13
-	_PageSize	= 1 << _PageShift
-	_PageMask	= _PageSize - 1
+	_PageShift = 13
+	_PageSize  = 1 << _PageShift
+	_PageMask  = _PageSize - 1
 )
 
 const (
-	_64bit	= 1 << (^uintptr(0) >> 63) / 2
+	_64bit = 1 << (^uintptr(0) >> 63) / 2
 
-	_NumSizeClasses	= 67
+	_NumSizeClasses = 67
 
-	_MaxSmallSize	= 32 << 10
+	_MaxSmallSize = 32 << 10
 
-	_TinySize	= 16
-	_TinySizeClass	= 2
+	_TinySize      = 16
+	_TinySizeClass = 2
 
-	_FixAllocChunk	= 16 << 10
-	_MaxMHeapList	= 1 << (20 - _PageShift)
-	_HeapAllocChunk	= 1 << 20
+	_FixAllocChunk  = 16 << 10
+	_MaxMHeapList   = 1 << (20 - _PageShift)
+	_HeapAllocChunk = 1 << 20
 
-	_StackCacheSize	= 32 * 1024
+	_StackCacheSize = 32 * 1024
 
-	_NumStackOrders	= 4 - sys.PtrSize/4*sys.GoosWindows - 1*sys.GoosPlan9
+	_NumStackOrders = 4 - sys.PtrSize/4*sys.GoosWindows - 1*sys.GoosPlan9
 
-	_MHeapMap_TotalBits	= (_64bit*sys.GoosWindows)*35 + (_64bit*(1-sys.GoosWindows)*(1-sys.GoosDarwin*sys.GoarchArm64))*39 + sys.GoosDarwin*sys.GoarchArm64*31 + (1-_64bit)*32
-	_MHeapMap_Bits		= _MHeapMap_TotalBits - _PageShift
+	_MHeapMap_TotalBits = (_64bit*sys.GoosWindows)*35 + (_64bit*(1-sys.GoosWindows)*(1-sys.GoosDarwin*sys.GoarchArm64))*39 + sys.GoosDarwin*sys.GoarchArm64*31 + (1-_64bit)*32
+	_MHeapMap_Bits      = _MHeapMap_TotalBits - _PageShift
 
-	_MaxMem	= uintptr(1<<_MHeapMap_TotalBits - 1)
+	_MaxMem = uintptr(1<<_MHeapMap_TotalBits - 1)
 
-	_MaxGcproc	= 32
+	_MaxGcproc = 32
 )
 
 const _MaxArena32 = 1<<32 - 1
 
 type persistentAlloc struct {
-	base	unsafe.Pointer
-	off	uintptr
+	base unsafe.Pointer
+	off  uintptr
 }

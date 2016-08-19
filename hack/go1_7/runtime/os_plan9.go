@@ -5,9 +5,9 @@
 package runtime
 
 type mOS struct {
-	waitsemacount	uint32
-	notesig		*int8
-	errstr		*byte
+	waitsemacount uint32
+	notesig       *int8
+	errstr        *byte
 }
 
 type _Plink uintptr

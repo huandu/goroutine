@@ -7,8 +7,8 @@
 package runtime
 
 const (
-	_SIG_DFL	uintptr	= 0
-	_SIG_IGN	uintptr	= 1
+	_SIG_DFL uintptr = 0
+	_SIG_IGN uintptr = 1
 )
 
 // sigmask represents a general signal mask compatible with the GOOS

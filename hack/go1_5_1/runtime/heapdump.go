@@ -12,28 +12,28 @@
 package runtime
 
 const (
-	fieldKindEol		= 0
-	fieldKindPtr		= 1
-	fieldKindIface		= 2
-	fieldKindEface		= 3
-	tagEOF			= 0
-	tagObject		= 1
-	tagOtherRoot		= 2
-	tagType			= 3
-	tagGoroutine		= 4
-	tagStackFrame		= 5
-	tagParams		= 6
-	tagFinalizer		= 7
-	tagItab			= 8
-	tagOSThread		= 9
-	tagMemStats		= 10
-	tagQueuedFinalizer	= 11
-	tagData			= 12
-	tagBSS			= 13
-	tagDefer		= 14
-	tagPanic		= 15
-	tagMemProf		= 16
-	tagAllocSample		= 17
+	fieldKindEol       = 0
+	fieldKindPtr       = 1
+	fieldKindIface     = 2
+	fieldKindEface     = 3
+	tagEOF             = 0
+	tagObject          = 1
+	tagOtherRoot       = 2
+	tagType            = 3
+	tagGoroutine       = 4
+	tagStackFrame      = 5
+	tagParams          = 6
+	tagFinalizer       = 7
+	tagItab            = 8
+	tagOSThread        = 9
+	tagMemStats        = 10
+	tagQueuedFinalizer = 11
+	tagData            = 12
+	tagBSS             = 13
+	tagDefer           = 14
+	tagPanic           = 15
+	tagMemProf         = 16
+	tagAllocSample     = 17
 )
 
 // buffer of pending write data
@@ -48,8 +48,8 @@ const (
 // Note: when a bucket overflows we may end up
 // serializing a type more than once.  That's ok.
 const (
-	typeCacheBuckets	= 256
-	typeCacheAssoc		= 4
+	typeCacheBuckets = 256
+	typeCacheAssoc   = 4
 )
 
 type typeCacheBucket struct {
@@ -57,9 +57,9 @@ type typeCacheBucket struct {
 }
 
 type childInfo struct {
-	argoff	uintptr
-	arglen	uintptr
-	args	bitvector
-	sp	*uint8
-	depth	uintptr
+	argoff uintptr
+	arglen uintptr
+	args   bitvector
+	sp     *uint8
+	depth  uintptr
 }

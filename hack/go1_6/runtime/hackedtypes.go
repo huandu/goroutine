@@ -9,5 +9,5 @@ type Goroutine g
 
 // Get goid.
 func (g *Goroutine) Goid() int64 {
-    return g.goid
+	return g.goid
 }
