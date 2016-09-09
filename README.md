@@ -28,6 +28,7 @@ Tested platforms.
 * go1.5.1 + Darwin (Mac OSX 10.11.6) + amd64 CPU
 * go1.6.3 + Darwin (Mac OSX 10.11.6) + amd64 CPU
 * go1.7 + Darwin (Mac OSX 10.11.6) + amd64 CPU
+* go1.7.1 + Darwin (Mac OSX 10.11.6) + amd64 CPU
 
 ## License ##
 
