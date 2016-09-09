@@ -1,5 +1,7 @@
 # Hacking goroutine #
 
+[![Build Status](https://travis-ci.org/huandu/goroutine.png?branch=master)](https://travis-ci.org/huandu/goroutine)
+
 Package goroutine is merely a hack.
 It exports goroutine id to outside so that you can use it for whatever purpose.
 However, it's highly recommended to not use this package in your daily life.
