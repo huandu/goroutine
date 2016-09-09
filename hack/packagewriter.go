@@ -9,16 +9,10 @@ import (
 	"path/filepath"
 )
 
-var copyright = `// Copyright 2016 Huan Du. All rights reserved.
-// Use of this source code is governed by a MIT
-// license that can be found in the LICENSE file.
-`
-
 type PackageWriter struct {
 	Context   *Context // Current running context.
 	Package   string   // Package name.
 	GoDir     string   // Hacked go src path name.
-	Copyright string   // Copyright notice.
 
 	output string // Path for all output files.
 }
@@ -30,7 +24,6 @@ func NewPackageWriter(context *Context, pkg string) *PackageWriter {
 		Context:   context,
 		Package:   pkg,
 		GoDir:     goDir,
-		Copyright: copyright,
 
 		output: output,
 	}

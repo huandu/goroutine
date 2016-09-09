@@ -67,3 +67,8 @@ func (a Version) Compare(b Version) int {
 		return 0
 	}
 }
+
+// Test ver and target equality.
+func (ver Version) Equal(target ...string) bool {
+	return ver.Compare((Version)(target)) == 0
+}

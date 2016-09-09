@@ -4,6 +4,10 @@
 
 package main
 
+import (
+	"github.com/huandu/goroutine/copyright"
+)
+
 type RuntimeHacker struct{}
 
 func (h *RuntimeHacker) Package() string {
@@ -22,8 +26,9 @@ func (h *RuntimeHacker) genHackedtypes(pw *PackageWriter) {
 	}
 
 	defer file.Close()
-	file.WriteString(pw.Copyright)
+	file.WriteString(copyright.COPYRIGHT)
 	file.WriteString(`
+
 package runtime
 
 // Goroutine is the internal type represents a goroutine.
