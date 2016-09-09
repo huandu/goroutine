@@ -29,6 +29,10 @@ func Parse(version string) (Version, error) {
 
 // Return a version string like "go1.6.3".
 func (v Version) String() string {
+	if v == nil {
+		return "<invalid>"
+	}
+
 	return "go" + v.Join(".")
 }
 

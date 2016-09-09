@@ -10,9 +10,9 @@ import (
 )
 
 type PackageWriter struct {
-	Context   *Context // Current running context.
-	Package   string   // Package name.
-	GoDir     string   // Hacked go src path name.
+	Context *Context // Current running context.
+	Package string   // Package name.
+	GoDir   string   // Hacked go src path name.
 
 	output string // Path for all output files.
 }
@@ -21,9 +21,9 @@ func NewPackageWriter(context *Context, pkg string) *PackageWriter {
 	goDir := "go" + context.Version.Join("_")
 	output := filepath.Join(context.Output, goDir, pkg)
 	return &PackageWriter{
-		Context:   context,
-		Package:   pkg,
-		GoDir:     goDir,
+		Context: context,
+		Package: pkg,
+		GoDir:   goDir,
 
 		output: output,
 	}
