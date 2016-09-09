@@ -27,10 +27,23 @@ Package goroutine is not well tested due to lack of test machines.
 Ideally, it should work on all go >= go1.5.
 
 Tested platforms.
-* go1.5.1 + Darwin (Mac OSX 10.11.6) + amd64 CPU
-* go1.6.3 + Darwin (Mac OSX 10.11.6) + amd64 CPU
-* go1.7 + Darwin (Mac OSX 10.11.6) + amd64 CPU
-* go1.7.1 + Darwin (Mac OSX 10.11.6) + amd64 CPU
+* Darwin (Mac OSX 10.11.6) + amd64 CPU
+    * go1.5.1
+    * go1.6.3
+    * go1.7
+    * go1.7.1
+* Travis CI (See https://travis-ci.org/huandu/goroutine)
+    * go1.5
+    * go1.5.1
+    * go1.5.2
+    * go1.5.3
+    * go1.5.4
+    * go1.6
+    * go1.6.1
+    * go1.6.2
+    * go1.6.3
+    * go1.7
+    * go1.7.1
 
 ## License ##
 
