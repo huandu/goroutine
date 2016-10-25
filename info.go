@@ -18,6 +18,8 @@ import (
 	runtime1_6_3 "github.com/huandu/goroutine/hack/go1_6_3/runtime"
 	runtime1_7 "github.com/huandu/goroutine/hack/go1_7/runtime"
 	runtime1_7_1 "github.com/huandu/goroutine/hack/go1_7_1/runtime"
+	runtime1_7_2 "github.com/huandu/goroutine/hack/go1_7_2/runtime"
+	runtime1_7_3 "github.com/huandu/goroutine/hack/go1_7_3/runtime"
 )
 
 func getg() unsafe.Pointer
@@ -50,6 +52,10 @@ func GoroutineId() int64 {
 		return (*runtime1_7.Goroutine)(gp).Goid()
 	case _GO_VERSION1_7_1:
 		return (*runtime1_7_1.Goroutine)(gp).Goid()
+	case _GO_VERSION1_7_2:
+		return (*runtime1_7_2.Goroutine)(gp).Goid()
+	case _GO_VERSION1_7_3:
+		return (*runtime1_7_3.Goroutine)(gp).Goid()
 
 	default:
 		panic("unsupported go version " + goVersion().String())
