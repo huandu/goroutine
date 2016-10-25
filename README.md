@@ -50,25 +50,24 @@ Tested platforms.
 
 ## How it works ##
 
-Go program is a statically built binary. The runtime inside a binary is statically linked. It means, if I know Go version
-and runtime source code for this version, I can copy struct declaration from runtime package source to my package and
-cast runtime internal pointers to its underlying struct safely. As Go is an open source project, I can always find the right
-struct for an interesting runtime pointer and then manipulate it.
+Go runtime inside a Go program binary is statically linked. It means, if I know Go version and runtime source code for
+this version, I can copy struct declaration from runtime package source to my package and cast runtime internal pointers
+to its underlying struct safely. As Go source code is open for everyone, I can always find the right struct for an
+interesting runtime pointer and then manipulate it.
 
-In this package, I just get current goroutine pointer (copy the `getg()` implementation from compiler) and cast it to a right
-struct. It sounds simple. However, the struct `g` refers many other internal types defined in `runtime` package. I cannot
-simply copy some necessary types to my package to make it work. I have to scan all types and constants in `runtime` and its
-internal packages to make the struct `g` well defined. Another challenge is that Go authors update `runtime` structs in nearly
-every major version (or even in a minor version). I have to maintain hacked code for every Go release. I develop a
-semi-automatical tool to make things easier. I guess I may need to think of other better way to avoid to generate hacked source
-for every Go release.
+In this package, I just get current goroutine pointer (copy the `getg()` implementation from compiler), cast it to a right
+struct and then return the id. It sounds simple but of course not. The struct `g` refers to many other internal types defined
+in `runtime` package. I cannot simply copy some necessary types to make it work. I have to scan all types and constants in
+`runtime` and its internal packages to make the struct `g` well defined. Another challenge is that Go authors update
+`runtime` structs in nearly every major version (or even in a minor version). I have to maintain hacked code for every Go
+release respectively. I develop a semi-automatical tool to make things easier. The tool is not smart enough.  I may need to
+think of other better way to avoid to generate hacked source code for every Go release.
 
-NOTE: Starting from go1.7.2, Go compiler generates some constants definition for `runtime` package according to build flags and
-environment when building. It makes current hack impossible to handle all posibile flag and environment combinations. I make a
+NOTE: Starting from go1.7.2, Go compiler generates some constant definitions for `runtime` package according to build flags and
+environment when building. It makes current hack impossible to handle all posibile flags and environment combinations. I make a
 hack to detour it and no impact to the major task of this package - get goroutine id. However, it's not a perfect solution.
-If I want to do more tricks in runtime, such constants may bother me.
 
-I'm think of a perfect solution. If you have any suggestion, please open issue and let me know. Many thanks.
+I'm thinking of a perfect solution. If you have any suggestion, please open issue and let me know. Many thanks.
 
 ## License ##
 
