@@ -37,3 +37,13 @@ func (pw *PackageWriter) CreateFile(filename string) (*os.File, error) {
 	fullPath := filepath.Join(pw.output, filename)
 	return os.Create(fullPath)
 }
+
+func (pw *PackageWriter) MustCreateFile(filename string) *os.File {
+	file, err := pw.CreateFile(filename)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return file
+}
