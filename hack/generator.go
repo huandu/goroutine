@@ -64,6 +64,13 @@ func (g *Generator) Parse() {
 	for i := 0; i < len(g.pkgs); i++ {
 		g.parsePkg(g.pkgs[i])
 	}
+
+	for _, pkg := range g.pkgs {
+		if hacker, ok := g.hackers[pkg]; ok {
+			packageWriter := NewPackageWriter(g.context, pkg)
+			hacker.Hack(packageWriter)
+		}
+	}
 }
 
 func (g *Generator) parsePkg(pkg string) {
@@ -315,8 +322,4 @@ FilesLoop:
 	}
 
 	g.parsedPkgs[pkg] = true
-
-	if hacker, ok := g.hackers[pkg]; ok {
-		hacker.Hack(packageWriter)
-	}
 }

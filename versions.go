@@ -28,6 +28,9 @@ const (
 	_GO_VERSION1_7_1
 	_GO_VERSION1_7_2
 	_GO_VERSION1_7_3
+	_GO_VERSION1_7_4
+	_GO_VERSION1_7_5
+	_GO_VERSION1_8
 )
 
 var (
@@ -68,6 +71,12 @@ func init() {
 		_goVersionCode = _GO_VERSION1_7_2
 	} else if _goVersion.Equal("1", "7", "3") {
 		_goVersionCode = _GO_VERSION1_7_3
+	} else if _goVersion.Equal("1", "7", "4") {
+		_goVersionCode = _GO_VERSION1_7_4
+	} else if _goVersion.Equal("1", "7", "5") {
+		_goVersionCode = _GO_VERSION1_7_5
+	} else if _goVersion.Equal("1", "8") {
+		_goVersionCode = _GO_VERSION1_8
 	}
 }
 
@@ -78,4 +87,3 @@ func goVersionCode() _GoVersion {
 func goVersion() version.Version {
 	return _goVersion
 }
-
