@@ -65,6 +65,8 @@ func GoroutineId() int64 {
 		return (*runtime1_7_5.Goroutine)(gp).Goid()
 	case _GO_VERSION1_8:
 		return (*runtime1_8.Goroutine)(gp).Goid()
+	case _GO_VERSION1_8_1:
+		return (*runtime1_8_1.Goroutine)(gp).Goid()
 
 	default:
 		panic("unsupported go version " + goVersion().String())
