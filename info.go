@@ -23,6 +23,7 @@ import (
 	runtime1_7_4 "github.com/huandu/goroutine/hack/go1_7_4/runtime"
 	runtime1_7_5 "github.com/huandu/goroutine/hack/go1_7_5/runtime"
 	runtime1_8 "github.com/huandu/goroutine/hack/go1_8/runtime"
+	runtime1_8_1 "github.com/huandu/goroutine/hack/go1_8/runtime"
 )
 
 func getg() unsafe.Pointer
