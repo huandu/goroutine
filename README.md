@@ -55,6 +55,8 @@ Tested platforms.
     * go1.7.5
     * go1.8
     * go1.8.1
+    * go1.8.2
+    * go1.8.3
 
 ## How it works ##
 
