@@ -38,6 +38,7 @@ Tested platforms.
     * go1.8
     * go1.8.1
     * go1.9
+    * go1.9.2
 * Travis CI (See https://travis-ci.org/huandu/goroutine)
     * go1.5
     * go1.5.1
@@ -59,6 +60,8 @@ Tested platforms.
     * go1.8.2
     * go1.8.3
     * go1.9
+    * go1.9.1
+    * go1.9.2
 
 ## How it works ##
 
